@@ -13,6 +13,8 @@
     gtag("js", new Date());
     gtag("config", "G-GCNQEEZ8MY");
   </script>
+  <!-- QRCode.js：用于在结果卡里生成“扫码打开测试”的二维码 -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     :root {
@@ -533,6 +535,30 @@
       text-align: center;
     }
 
+    .hidden-share-qr {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      width: 112px;
+      height: 112px;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .hidden-share-qr canvas,
+    .hidden-share-qr img {
+      width: 112px !important;
+      height: 112px !important;
+      display: block;
+    }
+
+    .share-btn {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
     .modal-mask {
       position: fixed;
       inset: 0;
@@ -727,9 +753,13 @@
       <div id="dimensions" class="dimensions"></div>
     </div>
 
+    <div id="pageQr" class="hidden-share-qr" aria-hidden="true"></div>
+
     <div class="action-stack">
       <button id="downloadBtn" class="primary-btn" style="margin-top: 0;">下载结果卡</button>
       <p id="downloadStatus" class="status"></p>
+      <button id="shareBtn" class="group-btn share-btn">转发给朋友</button>
+      <p id="shareStatus" class="status"></p>
       <button id="groupBtn" class="group-btn">看看OOR同人御守</button>
       <p class="small-note">taka保佑抽票必中~</p>
       <button id="restartBtn" class="secondary-btn" style="width: 100%; min-height: 56px; border-radius: 24px;">重新测试</button>
@@ -1001,6 +1031,102 @@
       }
     }
 
+    function getShareUrl() {
+      return `${window.location.origin}${window.location.pathname}`;
+    }
+
+    function getResultAnalyticsParams() {
+      return {
+        result_id: state.result?.type?.id || "unknown",
+        result_type: state.result?.type?.shortName || "unknown",
+        result_name: state.result?.type?.displayName || "unknown",
+        match: state.result?.match || 0,
+      };
+    }
+
+    function renderPageQr() {
+      const qrEl = $("pageQr");
+      if (!qrEl) return;
+      const url = getShareUrl();
+      const shareUrlText = $("shareUrlText");
+      if (shareUrlText) shareUrlText.textContent = url;
+      qrEl.innerHTML = "";
+
+      if (typeof QRCode === "function") {
+        new QRCode(qrEl, {
+          text: url,
+          width: 112,
+          height: 112,
+          colorDark: "#17251d",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M,
+        });
+      } else {
+        qrEl.textContent = "二维码加载中";
+        qrEl.style.fontSize = "12px";
+        qrEl.style.color = "var(--muted)";
+      }
+    }
+
+    function getQrCanvasForResultCard() {
+      const qrEl = $("pageQr");
+      if (!qrEl) return null;
+      return qrEl.querySelector("canvas") || qrEl.querySelector("img");
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const input = document.createElement("textarea");
+      input.value = text;
+      input.setAttribute("readonly", "");
+      input.style.position = "fixed";
+      input.style.left = "-9999px";
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      input.remove();
+    }
+
+    async function shareTest() {
+      const url = getShareUrl();
+      const resultText = state.result?.type?.shortName ? `我测出了 ${state.result.type.shortName}，` : "";
+      const shareData = {
+        title: "ONE OK ROCK 人格测试｜游音视域",
+        text: `${resultText}来测测你在 OOR 里是哪一种乐队灵魂。`,
+        url,
+      };
+
+      trackAnalyticsEvent("share_test_click", {
+        button_name: "share_test",
+        button_text: $("shareBtn").textContent.trim(),
+        ...getResultAnalyticsParams(),
+      });
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          $("shareStatus").textContent = "已打开系统分享面板。";
+          trackAnalyticsEvent("share_test_success", {
+            share_method: "web_share",
+            ...getResultAnalyticsParams(),
+          });
+        } else {
+          await copyText(url);
+          $("shareStatus").textContent = "链接已复制，可以粘贴发给朋友。";
+          trackAnalyticsEvent("share_test_success", {
+            share_method: "copy_link",
+            ...getResultAnalyticsParams(),
+          });
+        }
+      } catch (err) {
+        $("shareStatus").textContent = "分享未完成，可以重新点击按钮尝试。";
+      }
+    }
+
     function show(page) {
       ["homePage", "testPage", "resultPage"].forEach((id) => $(id).classList.add("hidden"));
       $(page).classList.remove("hidden");
@@ -1114,7 +1240,9 @@
       });
 
       $("downloadStatus").textContent = "";
+      $("shareStatus").textContent = "";
       show("resultPage");
+      renderPageQr();
     }
 
     function reset() {
@@ -1210,7 +1338,7 @@
       const r = result.type;
       const canvas = document.createElement("canvas");
       const width = 900;
-      const height = 1600;
+      const height = 1800;
       const scale = 2;
       canvas.width = width * scale;
       canvas.height = height * scale;
@@ -1229,7 +1357,7 @@
         ctx.fillRect(0, 0, width, height);
 
         ctx.fillStyle = "#ffffff";
-        roundRect(ctx, 48, 48, 804, 1504, 42);
+        roundRect(ctx, 48, 48, 804, height - 96, 42);
         ctx.fill();
         ctx.strokeStyle = "#d8eadb";
         ctx.lineWidth = 3;
@@ -1295,9 +1423,45 @@
         setCanvasFont(ctx, 500, 27);
         wrapText(ctx, r.summary, 126, descY + 126, 650, 43, 5);
 
+        const shareY = 1490;
+        const shareH = 200;
+        ctx.fillStyle = "#ffffff";
+        roundRect(ctx, 86, shareY, 728, shareH, 30);
+        ctx.fill();
+        ctx.strokeStyle = "#d8eadb";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        ctx.fillStyle = "#17251d";
+        setCanvasFont(ctx, 800, 31);
+        ctx.fillText("扫码打开测试", 126, shareY + 62);
+
+        ctx.fillStyle = "#435349";
+        setCanvasFont(ctx, 500, 25);
+        wrapText(ctx, "扫码就能直接测自己的OOR人格哦~", 126, shareY + 112, 430, 40, 2);
+
+        const qrX = 630;
+        const qrY = shareY + 32;
+        const qrSize = 136;
+        ctx.fillStyle = "#ffffff";
+        roundRect(ctx, qrX - 12, qrY - 12, qrSize + 24, qrSize + 24, 22);
+        ctx.fill();
+        ctx.strokeStyle = "#d8eadb";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        const qrSource = getQrCanvasForResultCard();
+        if (qrSource) {
+          ctx.drawImage(qrSource, qrX, qrY, qrSize, qrSize);
+        } else {
+          ctx.fillStyle = "#6a7d70";
+          setCanvasFont(ctx, 700, 20);
+          wrapText(ctx, "扫码打开\n测试", qrX + 18, qrY + 62, qrSize - 36, 28, 2);
+        }
+
         ctx.fillStyle = "#6a7d70";
         setCanvasFont(ctx, 500, 23);
-        ctx.fillText(`${CONFIG.brand}｜${CONFIG.slogan}`, 126, 1504);
+        ctx.fillText(`${CONFIG.brand}｜${CONFIG.slogan}`, 126, height - 72);
       }
 
       drawBase();
@@ -1390,7 +1554,7 @@
 
         card.drawTextBlocks();
         await downloadCanvas(card.canvas, filename);
-        $("downloadStatus").textContent = "结果卡已生成。如果浏览器没有自动下载，请长按图片保存。";
+        $("downloadStatus").textContent = "结果卡已生成，底部二维码可扫码打开测试。如果浏览器没有自动下载，请长按图片保存。";
       } catch (err) {
         console.error("带图结果卡生成失败：", err);
         try {
@@ -1422,7 +1586,15 @@
     $("submitBtn").addEventListener("click", renderResult);
     $("closeResultBtn").addEventListener("click", reset);
     $("restartBtn").addEventListener("click", reset);
-    $("downloadBtn").addEventListener("click", downloadResultCard);
+    $("downloadBtn").addEventListener("click", () => {
+      trackAnalyticsEvent("download_result_card_click", {
+        button_name: "download_result_card",
+        button_text: $("downloadBtn").textContent.trim(),
+        ...getResultAnalyticsParams(),
+      });
+      downloadResultCard();
+    });
+    $("shareBtn").addEventListener("click", shareTest);
 
     $("groupBtn").addEventListener("click", () => {
       trackAnalyticsEvent("oor_omamori_click", {
@@ -1434,7 +1606,7 @@
         match: state.result?.match || 0,
       });
 
-      $("groupModal").classList.remove("hidden");
+      window.location.href = "https://xhslink.com/m/5iE3OeOaiT7";
     });
 
     $("closeGroupModalBtn").addEventListener("click", () => {
