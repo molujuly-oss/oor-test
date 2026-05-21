@@ -1,0 +1,1429 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ONE OK ROCK 人格测试｜游音视域</title>
+  <meta name="description" content="测测你在 ONE OK ROCK 里是哪一种乐队灵魂，领取你的 OOR 人格。" />
+  <style>
+    :root {
+      --bg: #f5faf4;
+      --card: #ffffff;
+      --text: #17251d;
+      --muted: #607064;
+      --line: #d8eadb;
+      --soft: #edf6ee;
+      --green: #4d7058;
+      --shadow: 0 8px 24px rgba(23, 37, 29, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+    }
+
+    button {
+      font: inherit;
+      border: 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 16px 16px 36px;
+    }
+
+    .page.home {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 40px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .home-card { padding: 24px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    .home-title {
+      font-size: 38px;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-weight: 950;
+    }
+
+    .home-subtitle {
+      margin-top: 16px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .info-box {
+      margin-top: 28px;
+      padding: 16px;
+      border-radius: 24px;
+      background: var(--bg);
+    }
+
+    .info-box-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .info-box-text {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .primary-btn {
+      width: 100%;
+      min-height: 56px;
+      margin-top: 28px;
+      border-radius: 24px;
+      background: var(--text);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 950;
+      box-shadow: 0 12px 28px rgba(23, 37, 29, 0.16);
+    }
+
+    .primary-btn:active, .secondary-btn:active, .option-btn:active { transform: scale(0.99); }
+
+    details.about {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    details.about summary {
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    details.about p {
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: -16px -16px 16px;
+      padding: 12px 16px 14px;
+      background: rgba(245, 250, 244, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .plain-btn {
+      background: transparent;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 900;
+      padding: 6px 0;
+    }
+
+    .progress-text {
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--line);
+    }
+
+    .progress-inner {
+      height: 100%;
+      width: 0%;
+      background: var(--green);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .question-card {
+      padding: 20px;
+      border-radius: 30px;
+    }
+
+    .question-index {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .question-title {
+      margin-top: 12px;
+      font-size: 24px;
+      line-height: 1.45;
+      font-weight: 950;
+      letter-spacing: -0.02em;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .option-btn {
+      width: 100%;
+      min-height: 64px;
+      padding: 16px;
+      text-align: left;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 850;
+      line-height: 1.65;
+    }
+
+    .option-btn.selected {
+      border-color: var(--green);
+      background: var(--soft);
+    }
+
+    .letter {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 28px;
+      height: 28px;
+      margin-right: 10px;
+      border-radius: 999px;
+      background: var(--text);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 950;
+      vertical-align: 1px;
+    }
+
+    .nav-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 18px;
+    }
+
+    .secondary-btn {
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 16px;
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .submit-btn {
+      flex: 1;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 16px;
+      background: var(--text);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .submit-hint {
+      flex: 1;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: right;
+    }
+
+    .result-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: -16px -16px 16px;
+      padding: 12px 16px;
+      background: rgba(245, 250, 244, 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .result-topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .close-btn, .more-btn {
+      background: transparent;
+      color: var(--muted);
+      font-size: 28px;
+      line-height: 1;
+      padding: 4px 6px;
+    }
+
+    .result-top-title {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .result-top-subtitle {
+      margin-top: 2px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .image-card {
+      padding: 14px;
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      height: 520px;
+      overflow: hidden;
+      border-radius: 24px;
+      background: var(--result-color, #8bb7d9);
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .image-fallback {
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      color: #fff;
+    }
+
+    .image-fallback-name {
+      font-size: 48px;
+      font-weight: 950;
+      line-height: 1.05;
+    }
+
+    .image-fallback-tip {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .quote-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 80px 20px 20px;
+      color: #fff;
+      background: linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0));
+    }
+
+    .quote-overlay p {
+      font-size: 20px;
+      line-height: 1.45;
+      font-weight: 950;
+    }
+
+    .result-card {
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: 24px;
+    }
+
+    .section-label {
+      color: #6a7d70;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .result-name {
+      margin-top: 12px;
+      font-size: 31px;
+      line-height: 1.2;
+      font-weight: 950;
+      letter-spacing: -0.03em;
+    }
+
+    .match-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      margin-top: 18px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--green);
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .result-summary {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 950;
+    }
+
+    .body-text {
+      margin-top: 14px;
+      color: #435349;
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .sign-title {
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .sign-quote {
+      margin-top: 10px;
+      font-size: 24px;
+      line-height: 1.45;
+      font-weight: 950;
+    }
+
+    .good-bad-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .good-bad-item {
+      padding: 12px;
+      border-radius: 18px;
+      background: var(--bg);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .good-bad-label {
+      margin-bottom: 4px;
+      color: var(--green);
+      font-weight: 950;
+    }
+
+    .dimensions {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .dimension-head {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .bar {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--soft);
+    }
+
+    .bar-inner {
+      height: 100%;
+      background: var(--green);
+      border-radius: 999px;
+    }
+
+    .action-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .group-btn {
+      width: 100%;
+      min-height: 56px;
+      border-radius: 24px;
+      background: var(--soft);
+      color: var(--green);
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .small-note {
+      padding: 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .modal-mask {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(0, 0, 0, 0.58);
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 28px;
+      background: #fff;
+      padding: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+      text-align: center;
+    }
+
+    .modal-title {
+      font-size: 22px;
+      font-weight: 950;
+      color: var(--text);
+    }
+
+    .modal-desc {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .qr-box {
+      margin: 18px auto 0;
+      width: 240px;
+      height: 240px;
+      border-radius: 20px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      padding: 10px;
+    }
+
+    .qr-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .qr-fallback {
+      width: 100%;
+      height: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      background: #fff;
+    }
+
+    .modal-tip {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .modal-close {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 18px;
+      border-radius: 18px;
+      background: var(--text);
+      color: #fff;
+      font-weight: 950;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 360px) {
+      .home-title { font-size: 34px; }
+      .result-name { font-size: 27px; }
+      .hero-image-wrap { height: 470px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="homePage" class="page home">
+    <div class="card home-card">
+      <div class="badge">游音视域｜把喜欢，系在身边</div>
+      <h1 class="home-title">ONE OK ROCK 人格测试</h1>
+      <p class="home-subtitle">测测你在 OOR 里是哪一种乐队灵魂。</p>
+
+      <div class="info-box">
+        <p class="info-box-title">测试说明</p>
+        <p class="info-box-text">共 24 题。凭第一感觉选择即可。完成后会得到你的 OOR 成员人格、匹配度和一支专属摇滚御签。</p>
+      </div>
+
+      <button id="startBtn" class="primary-btn">开始测试</button>
+    </div>
+
+    <details class="about">
+      <summary>关于游音视域</summary>
+      <p>我们是为动漫、游戏、音乐爱好者服务的情绪礼物品牌，把喜欢，系在身边。</p>
+    </details>
+  </div>
+
+  <div id="testPage" class="page hidden">
+    <div class="topbar">
+      <div class="topbar-row">
+        <button id="backHomeBtn" class="plain-btn">返回</button>
+        <div id="progressText" class="progress-text">1 / 24</div>
+        <div style="width: 36px;"></div>
+      </div>
+      <div class="progress"><div id="progressInner" class="progress-inner"></div></div>
+    </div>
+
+    <div class="card question-card">
+      <div id="questionIndex" class="question-index">第 1 题</div>
+      <h1 id="questionTitle" class="question-title"></h1>
+      <div id="options" class="options"></div>
+    </div>
+
+    <div class="nav-row">
+      <button id="prevBtn" class="secondary-btn">上一题</button>
+      <button id="submitBtn" class="submit-btn hidden">查看结果</button>
+      <div id="submitHint" class="submit-hint">全选完后查看结果</div>
+    </div>
+  </div>
+
+  <div id="resultPage" class="page hidden">
+    <div class="result-topbar">
+      <div class="result-topbar-inner">
+        <button id="closeResultBtn" class="close-btn">×</button>
+        <div>
+          <div class="result-top-title">ONE OK ROCK 人格测试</div>
+          <div class="result-top-subtitle">游音视域</div>
+        </div>
+        <button class="more-btn">⋯</button>
+      </div>
+    </div>
+
+    <div id="resultShareArea">
+      <div class="card image-card">
+        <div id="heroWrap" class="hero-image-wrap">
+          <img id="heroImage" class="hero-image" alt="角色图" />
+          <div id="imageFallback" class="image-fallback">
+            <div id="imageFallbackName" class="image-fallback-name"></div>
+            <div class="image-fallback-tip">角色图资源待配置</div>
+          </div>
+          <div class="quote-overlay"><p id="heroQuote"></p></div>
+        </div>
+      </div>
+
+      <div class="card result-card">
+        <p class="section-label">你的主类型</p>
+        <h1 id="resultName" class="result-name"></h1>
+        <div id="matchPill" class="match-pill"></div>
+        <p id="resultSummary" class="result-summary"></p>
+      </div>
+
+      <div class="card result-card">
+        <h2 class="section-title">简单解读</h2>
+        <p id="resultLongText" class="body-text"></p>
+      </div>
+
+      <div class="card result-card">
+        <h2 class="section-title">你的御签</h2>
+        <p id="signTitle" class="sign-title"></p>
+        <p id="signQuote" class="sign-quote"></p>
+        <p id="signText" class="body-text"></p>
+        <div class="good-bad-grid">
+          <div class="good-bad-item">
+            <div class="good-bad-label">今日宜</div>
+            <div id="signGood"></div>
+          </div>
+          <div class="good-bad-item">
+            <div class="good-bad-label">今日忌</div>
+            <div id="signBad"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card result-card">
+      <h2 class="section-title">六维度评分</h2>
+      <div id="dimensions" class="dimensions"></div>
+    </div>
+
+    <div class="action-stack">
+      <button id="downloadBtn" class="primary-btn" style="margin-top: 0;">下载结果卡</button>
+      <p id="downloadStatus" class="status"></p>
+      <button id="groupBtn" class="group-btn">看看OOR同人御守</button>
+      <p class="small-note">taka保佑抽票必中~</p>
+      <button id="restartBtn" class="secondary-btn" style="width: 100%; min-height: 56px; border-radius: 24px;">重新测试</button>
+    </div>
+  </div>
+
+  <div id="groupModal" class="modal-mask hidden">
+    <div class="modal-card">
+      <div class="modal-title">OOR同人御守</div>
+      <p class="modal-desc"></p>
+      <div class="qr-box">
+        <img id="groupQrImg" src="./assets/goods.jpg" alt="QQ群二维码" />
+        <div id="groupQrFallback" class="qr-fallback">二维码图片未找到。请把 QQ 群二维码放到：<br />assets/group/qq-group.png</div>
+      </div>
+      <p class="modal-tip">【小红书】ONEOKROCK御守taka款 😆 YnL68VudAq 😆 https://xhslink.com/m/5iE3OeOaiT7 点击链接或者复制本条信息打开【小红书app】查看 CA4852</p>
+      <button id="closeGroupModalBtn" class="modal-close">我知道了</button>
+    </div>
+  </div>
+
+  <script>
+    const CONFIG = {
+      brand: "游音视域",
+      slogan: "把喜欢，系在身边",
+      totalQuestions: 24,
+    };
+
+    const TYPES = {
+      taka: {
+        id: "taka",
+        name: "TAKA (森内贵宽)",
+        displayName: "TAKA (森内贵宽)",
+        shortName: "TAKA 型",
+        image: "./assets/1.jpg",
+        color: "#d8453d",
+        quote: "你的心里有火，声音只是它冲出来的方式。",
+        summary: "你是那种情绪浓度很高的人。你不一定总是外放，但真正被触动时，会爆发出很强的感染力。你适合把经历、痛感和热爱转化成表达，也常常能让别人因为你的真诚而重新燃起来。",
+        longText: "你的人格核心是“把真实说出来”。你讨厌虚假的轻松，也不喜欢把重要的感受糊弄过去。你可能会比别人更容易感到不甘、焦虑或被击中，但这也让你拥有很强的生命力。对你来说，成长不是变得没有情绪，而是学会让情绪成为作品、行动和答案。",
+        omikuji: {
+          title: "第壹番｜燃声签",
+          text: "不要急着把心里的火按灭。它有时会灼伤你，但也会照亮你。今天适合把没说出口的话，变成一次认真表达。",
+          good: "坦白表达、重新开始",
+          bad: "假装没事、压住热爱",
+        },
+      },
+      toru: {
+        id: "toru",
+        name: "TORU (山下亨)",
+        displayName: "TORU (山下亨)",
+        shortName: "TORU 型",
+        image: "./assets/2.jpg",
+        color: "#2f405f",
+        quote: "你不是站在最吵的位置，却决定了大家要去哪里。",
+        summary: "你有很强的方向感和责任意识。你擅长观察局势、整理混乱，也愿意在关键时刻承担决定。你未必每次都把情绪放在脸上，但你会用行动告诉别人：跟我走，别散。",
+        longText: "你的人格核心是“把可能性带到更远处”。你不喜欢原地打转，也很难忍受没有计划的消耗。你适合做组织者、推进者和长期主义者。只是你也要记得，不是所有关系都需要被安排得很完美。有时候，让别人看见你的柔软，也是一种领导力。",
+        omikuji: {
+          title: "第玖番｜掌舵签",
+          text: "你已经看见远方了，所以不要被眼前的小混乱拖住。今天适合做决定、定方向，也适合相信自己的判断。",
+          good: "制定计划、带人前进",
+          bad: "独自扛下所有压力",
+        },
+      },
+      ryota: {
+        id: "ryota",
+        name: "RYOTA (小浜良太)",
+        displayName: "RYOTA (小浜良太)",
+        shortName: "RYOTA 型",
+        image: "./assets/3.jpg",
+        color: "#5b7f63",
+        quote: "真正让一首歌站住的，常常不是最响的那一声。",
+        summary: "你是低调但非常重要的人。你不一定急着抢镜，却能在关系和团队里提供稳定的支撑。你的力量不是压迫感，而是一种让人安心的存在感。",
+        longText: "你的人格核心是“稳稳地在场”。你擅长把复杂的事情变简单，也擅长在别人慌乱时保持可靠。你可能偶尔会觉得自己不够耀眼，但很多时候，别人能自由发光，是因为你把底盘撑住了。不要低估自己的重量，你的温柔和稳定，本身就是很稀有的能力。",
+        omikuji: {
+          title: "第拾伍番｜低频签",
+          text: "不是所有重要的东西都需要站在正中央。你撑住的日常、关系和承诺，会在未来变成别人心里很深的安全感。",
+          good: "稳住节奏、照顾自己",
+          bad: "因为低调就否定价值",
+        },
+      },
+      tomoya: {
+        id: "tomoya",
+        name: "TOMOYA (神吉智也)",
+        displayName: "TOMOYA (神吉智也)",
+        shortName: "TOMOYA 型",
+        image: "./assets/4.jpg",
+        color: "#d99a35",
+        quote: "你的节奏一响，世界就没那么紧绷了。",
+        summary: "你是能把气氛重新调顺的人。你有幽默感、松弛感，也有很强的节奏直觉。你未必总是严肃地解决问题，但你很擅长让人从紧绷里回到当下。",
+        longText: "你的人格核心是“让一切重新合拍”。你知道什么时候该用力，什么时候该放松；也知道一个团队不能只靠冲刺，还需要呼吸、玩笑和默契。你看似轻松，其实很敏锐。你的存在会提醒大家：别只顾着抵达，也要记得享受一起演奏的过程。",
+        omikuji: {
+          title: "第贰拾番｜节奏签",
+          text: "今天不必把所有事情都逼到极限。跟着自己的鼓点走，慢一点也没关系。真正适合你的节奏，会把你带回正确的位置。",
+          good: "放松一点、找回手感",
+          bad: "被别人的节奏牵着跑",
+        },
+      },
+    };
+
+    const DIMENSIONS = [
+      { key: "emotion", label: "情绪爆发" },
+      { key: "vision", label: "方向感" },
+      { key: "support", label: "支撑力" },
+      { key: "rhythm", label: "节奏感" },
+      { key: "drive", label: "冲刺感" },
+      { key: "warmth", label: "松弛度" },
+    ];
+
+    const QUESTIONS = [
+      { text: "面对一件你很在意的事，你通常会怎么开始？", options: [
+        { text: "先把情绪点燃，确认自己真的想要", group: "A", dim: { emotion: 3, drive: 1 } },
+        { text: "先判断方向，决定这件事值不值得投入", group: "B", dim: { vision: 3 } },
+        { text: "先把基础打稳，不急着出头", group: "C", dim: { support: 3 } },
+        { text: "先找到节奏，让自己慢慢进入状态", group: "D", dim: { rhythm: 3, warmth: 1 } },
+      ] },
+      { text: "你在团队里最自然的位置是？", options: [
+        { text: "把大家的情绪带起来的人", group: "A", dim: { emotion: 3 } },
+        { text: "看清目标、带人往前走的人", group: "B", dim: { vision: 3, drive: 1 } },
+        { text: "不抢镜但一直托住底盘的人", group: "C", dim: { support: 3 } },
+        { text: "稳住节奏、让大家安心发挥的人", group: "D", dim: { rhythm: 3, warmth: 1 } },
+      ] },
+      { text: "如果要登上一个很大的舞台，你最在意什么？", options: [
+        { text: "能不能把真实的自己唱出去", group: "A", dim: { emotion: 3, drive: 1 } },
+        { text: "整场演出的走向和完成度", group: "B", dim: { vision: 3 } },
+        { text: "自己有没有稳稳撑住该撑的部分", group: "C", dim: { support: 3 } },
+        { text: "现场节奏是不是舒服又有力量", group: "D", dim: { rhythm: 3 } },
+      ] },
+      { text: "朋友低落时，你更可能怎么做？", options: [
+        { text: "用很直接的话把 TA 拉回现实：你还可以", group: "A", dim: { emotion: 2, drive: 1 } },
+        { text: "帮 TA 分析下一步该怎么走", group: "B", dim: { vision: 3 } },
+        { text: "安静陪着，给 TA 一个可靠的后方", group: "C", dim: { support: 3, warmth: 1 } },
+        { text: "用轻松的方式让 TA 先笑出来", group: "D", dim: { warmth: 3, rhythm: 1 } },
+      ] },
+      { text: "你最害怕哪种状态？", options: [
+        { text: "明明有很多情绪，却说不出来", group: "A", dim: { emotion: 3 } },
+        { text: "一群人努力，但方向是乱的", group: "B", dim: { vision: 3 } },
+        { text: "自己成了团队里不稳定的那一环", group: "C", dim: { support: 3 } },
+        { text: "节奏被打乱，怎么都找不回感觉", group: "D", dim: { rhythm: 3 } },
+      ] },
+      { text: "你更相信哪种成长？", options: [
+        { text: "把痛苦变成声音", group: "A", dim: { emotion: 3 } },
+        { text: "把野心变成计划", group: "B", dim: { vision: 2, drive: 1 } },
+        { text: "把普通练习变成肌肉记忆", group: "C", dim: { support: 2, drive: 1 } },
+        { text: "把重复的日子敲出新的节拍", group: "D", dim: { rhythm: 3 } },
+      ] },
+      { text: "被别人夸奖时，你最想听到的是？", options: [
+        { text: "你真的很有感染力", group: "A", dim: { emotion: 3 } },
+        { text: "有你在，大家就知道往哪走", group: "B", dim: { vision: 3 } },
+        { text: "你虽然低调，但少了你不行", group: "C", dim: { support: 3 } },
+        { text: "你让整个气氛都稳下来了", group: "D", dim: { rhythm: 2, warmth: 1 } },
+      ] },
+      { text: "你做决定时更像？", options: [
+        { text: "先问自己的心有没有被点燃", group: "A", dim: { emotion: 3 } },
+        { text: "先看这一步会把我带去哪里", group: "B", dim: { vision: 3 } },
+        { text: "先确认我能不能持续承担", group: "C", dim: { support: 3 } },
+        { text: "先感受当下节奏对不对", group: "D", dim: { rhythm: 3 } },
+      ] },
+      { text: "如果生活是一首歌，你希望自己是哪一部分？", options: [
+        { text: "最让人起鸡皮疙瘩的主唱段", group: "A", dim: { emotion: 3 } },
+        { text: "推着整首歌前进的吉他线", group: "B", dim: { vision: 2, drive: 1 } },
+        { text: "不明显但一直让歌成立的低频", group: "C", dim: { support: 3 } },
+        { text: "让所有人一起点头的鼓点", group: "D", dim: { rhythm: 3 } },
+      ] },
+      { text: "你面对压力时的第一反应是？", options: [
+        { text: "咬牙顶上去，越痛越要证明", group: "A", dim: { emotion: 2, drive: 2 } },
+        { text: "冷静下来，重新排优先级", group: "B", dim: { vision: 3 } },
+        { text: "不慌，把自己该做的部分做好", group: "C", dim: { support: 3 } },
+        { text: "先稳住呼吸，再找回节奏", group: "D", dim: { rhythm: 2, warmth: 1 } },
+      ] },
+      { text: "你喜欢怎样的关系？", options: [
+        { text: "可以坦白、激烈、真诚地靠近", group: "A", dim: { emotion: 3 } },
+        { text: "彼此信任，也能一起往前冲", group: "B", dim: { vision: 2, drive: 1 } },
+        { text: "不必多说，但知道对方一直在", group: "C", dim: { support: 3, warmth: 1 } },
+        { text: "相处舒服，有笑点也有默契", group: "D", dim: { warmth: 3, rhythm: 1 } },
+      ] },
+      { text: "当你开始喜欢一个作品或乐队，你最容易被什么打中？", options: [
+        { text: "声音里的情绪和爆发", group: "A", dim: { emotion: 3 } },
+        { text: "整体气质、舞台布局和野心", group: "B", dim: { vision: 3 } },
+        { text: "那些越听越重要的细节", group: "C", dim: { support: 3 } },
+        { text: "现场的律动和成员之间的松弛感", group: "D", dim: { rhythm: 2, warmth: 1 } },
+      ] },
+      { text: "如果你要给自己一句鼓励，会选？", options: [
+        { text: "把心里的火唱出来", group: "A", dim: { emotion: 3 } },
+        { text: "别偏航，继续往更大的地方走", group: "B", dim: { vision: 3 } },
+        { text: "稳住，你已经撑过很多次了", group: "C", dim: { support: 3 } },
+        { text: "别急，跟上自己的节奏", group: "D", dim: { rhythm: 3 } },
+      ] },
+      { text: "你最讨厌别人误解你哪一点？", options: [
+        { text: "以为我只是情绪化，其实我很认真", group: "A", dim: { emotion: 3 } },
+        { text: "以为我太强势，其实我只是不想散掉", group: "B", dim: { vision: 2, drive: 1 } },
+        { text: "以为我没存在感，其实我一直在输出", group: "C", dim: { support: 3 } },
+        { text: "以为我太随和，其实我很清楚节奏", group: "D", dim: { rhythm: 2, warmth: 1 } },
+      ] },
+      { text: "你更向往哪种舞台瞬间？", options: [
+        { text: "全场一起大合唱，情绪冲到顶点", group: "A", dim: { emotion: 3, drive: 1 } },
+        { text: "灯光亮起，所有安排刚好落位", group: "B", dim: { vision: 3 } },
+        { text: "一个低频进入，整首歌突然有了重量", group: "C", dim: { support: 3 } },
+        { text: "鼓点一响，所有人同时被带起来", group: "D", dim: { rhythm: 3, drive: 1 } },
+      ] },
+      { text: "你处理冲突时更像？", options: [
+        { text: "直接说开，不喜欢憋着", group: "A", dim: { emotion: 3 } },
+        { text: "先控制局面，再谈感受", group: "B", dim: { vision: 3 } },
+        { text: "少说狠话，先把关系撑住", group: "C", dim: { support: 3, warmth: 1 } },
+        { text: "先缓和气氛，别让场面失控", group: "D", dim: { warmth: 3 } },
+      ] },
+      { text: "你最容易在哪个瞬间燃起来？", options: [
+        { text: "有人说“不可能”的时候", group: "A", dim: { emotion: 2, drive: 2 } },
+        { text: "看到更大的目标在前面的时候", group: "B", dim: { vision: 2, drive: 1 } },
+        { text: "发现自己的坚持终于有意义的时候", group: "C", dim: { support: 2, emotion: 1 } },
+        { text: "一切突然合拍的时候", group: "D", dim: { rhythm: 3 } },
+      ] },
+      { text: "如果你是一种能量，你更像？", options: [
+        { text: "火花，刺眼但真实", group: "A", dim: { emotion: 3 } },
+        { text: "风向，安静却决定去处", group: "B", dim: { vision: 3 } },
+        { text: "地基，不显眼但承重", group: "C", dim: { support: 3 } },
+        { text: "心跳，稳定又有生命力", group: "D", dim: { rhythm: 3, warmth: 1 } },
+      ] },
+      { text: "你最想守护自己的哪一面？", options: [
+        { text: "还愿意热烈表达的自己", group: "A", dim: { emotion: 3 } },
+        { text: "还敢规划远方的自己", group: "B", dim: { vision: 3 } },
+        { text: "还愿意默默坚持的自己", group: "C", dim: { support: 3 } },
+        { text: "还保有轻松和幽默的自己", group: "D", dim: { warmth: 3 } },
+      ] },
+      { text: "如果你要完成一件长期目标，你靠什么撑住？", options: [
+        { text: "不甘心和热爱", group: "A", dim: { emotion: 2, drive: 1 } },
+        { text: "清晰的方向和自我要求", group: "B", dim: { vision: 3 } },
+        { text: "每天一点点的稳定积累", group: "C", dim: { support: 3 } },
+        { text: "能让自己持续下去的节奏", group: "D", dim: { rhythm: 3 } },
+      ] },
+      { text: "你觉得“强大”更接近什么？", options: [
+        { text: "经历过崩溃，还是能开口唱", group: "A", dim: { emotion: 3 } },
+        { text: "能带着别人一起走向更远处", group: "B", dim: { vision: 3, drive: 1 } },
+        { text: "不用证明，也能让人安心", group: "C", dim: { support: 3, warmth: 1 } },
+        { text: "再混乱也能把节奏找回来", group: "D", dim: { rhythm: 3 } },
+      ] },
+      { text: "你在喜欢的人面前更容易变成？", options: [
+        { text: "很真、很直接、藏不住", group: "A", dim: { emotion: 3 } },
+        { text: "想变得更可靠，也更有担当", group: "B", dim: { vision: 2, support: 1 } },
+        { text: "默默照顾对方的习惯和细节", group: "C", dim: { support: 3, warmth: 1 } },
+        { text: "想让对方轻松，想逗对方笑", group: "D", dim: { warmth: 3 } },
+      ] },
+      { text: "如果抽到一支签，你希望它告诉你？", options: [
+        { text: "你的声音值得被听见", group: "A", dim: { emotion: 3 } },
+        { text: "你选择的方向没有错", group: "B", dim: { vision: 3 } },
+        { text: "你撑住的东西会开花", group: "C", dim: { support: 3 } },
+        { text: "你的节奏会带你回到自己", group: "D", dim: { rhythm: 3 } },
+      ] },
+      { text: "最后，你希望自己成为哪种人？", options: [
+        { text: "热烈、真诚、把痛苦也唱成光的人", group: "A", dim: { emotion: 3, drive: 1 } },
+        { text: "清醒、坚定、能带人去远方的人", group: "B", dim: { vision: 3, drive: 1 } },
+        { text: "温柔、稳定、在背后撑住一切的人", group: "C", dim: { support: 3, warmth: 1 } },
+        { text: "松弛、有趣、让世界重新合拍的人", group: "D", dim: { rhythm: 2, warmth: 2 } },
+      ] },
+    ];
+
+    const state = {
+      screen: "home",
+      index: 0,
+      answers: Array(CONFIG.totalQuestions).fill(null),
+      result: null,
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function show(page) {
+      ["homePage", "testPage", "resultPage"].forEach((id) => $(id).classList.add("hidden"));
+      $(page).classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+
+    function renderQuestion() {
+      const q = QUESTIONS[state.index];
+      const answeredCount = state.answers.filter((x) => x !== null).length;
+      $("progressText").textContent = `${state.index + 1} / ${CONFIG.totalQuestions}`;
+      $("progressInner").style.width = `${((state.index + 1) / CONFIG.totalQuestions) * 100}%`;
+      $("questionIndex").textContent = `第 ${state.index + 1} 题`;
+      $("questionTitle").textContent = q.text;
+
+      $("options").innerHTML = "";
+      q.options.forEach((option, i) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn" + (state.answers[state.index] === i ? " selected" : "");
+        btn.innerHTML = `<span class="letter">${String.fromCharCode(65 + i)}</span>${option.text}`;
+        btn.addEventListener("click", () => choose(i));
+        $("options").appendChild(btn);
+      });
+
+      $("prevBtn").disabled = state.index === 0;
+      if (answeredCount === CONFIG.totalQuestions) {
+        $("submitBtn").classList.remove("hidden");
+        $("submitHint").classList.add("hidden");
+      } else {
+        $("submitBtn").classList.add("hidden");
+        $("submitHint").classList.remove("hidden");
+      }
+    }
+
+    function choose(optionIndex) {
+      state.answers[state.index] = optionIndex;
+      renderQuestion();
+      if (state.index < QUESTIONS.length - 1) {
+        setTimeout(() => {
+          state.index += 1;
+          renderQuestion();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 120);
+      }
+    }
+
+    function calcResult() {
+      const groupCount = { A: 0, B: 0, C: 0, D: 0 };
+      const dims = Object.fromEntries(DIMENSIONS.map((d) => [d.key, 0]));
+
+      state.answers.forEach((answerIndex, questionIndex) => {
+        if (answerIndex === null || answerIndex === undefined) return;
+        const option = QUESTIONS[questionIndex].options[answerIndex];
+        groupCount[option.group] += 1;
+        Object.entries(option.dim || {}).forEach(([key, value]) => {
+          dims[key] = (dims[key] || 0) + value;
+        });
+      });
+
+      const sortedGroups = Object.entries(groupCount).sort((a, b) => b[1] - a[1]);
+      const topGroup = sortedGroups[0][0];
+      const topCount = sortedGroups[0][1];
+
+      let typeId = "taka";
+      if (topGroup === "A") typeId = "taka";
+      if (topGroup === "B") typeId = "toru";
+      if (topGroup === "C") typeId = "ryota";
+      if (topGroup === "D") typeId = "tomoya";
+
+      const match = Math.min(96, Math.max(72, Math.round(68 + (topCount / CONFIG.totalQuestions) * 30 + Math.random() * 4)));
+      const maxDim = Math.max(...Object.values(dims), 1);
+      const normDims = Object.fromEntries(DIMENSIONS.map((d) => [d.key, Math.round(((dims[d.key] || 0) / maxDim) * 100)]));
+
+      return { type: TYPES[typeId], match, groupCount, dims: normDims };
+    }
+
+    function renderResult() {
+      state.result = calcResult();
+      const r = state.result.type;
+      document.documentElement.style.setProperty("--result-color", r.color);
+
+      $("heroWrap").style.backgroundColor = r.color;
+      $("heroImage").src = r.image;
+      $("heroImage").style.display = "block";
+      $("imageFallback").style.display = "none";
+      $("imageFallbackName").textContent = r.shortName;
+      $("heroImage").onerror = () => {
+        $("heroImage").style.display = "none";
+        $("imageFallback").style.display = "flex";
+      };
+
+      $("heroQuote").textContent = r.quote;
+      $("resultName").textContent = r.displayName;
+      $("matchPill").textContent = `匹配度 ${state.result.match}%`;
+      $("resultSummary").textContent = r.summary;
+      $("resultLongText").textContent = r.longText;
+      $("signTitle").textContent = r.omikuji.title;
+      $("signQuote").textContent = r.quote;
+      $("signText").textContent = r.omikuji.text;
+      $("signGood").textContent = r.omikuji.good;
+      $("signBad").textContent = r.omikuji.bad;
+
+      $("dimensions").innerHTML = "";
+      DIMENSIONS.forEach((d) => {
+        const value = state.result.dims[d.key] || 0;
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <div class="dimension-head"><span>${d.label}</span><span>${value}</span></div>
+          <div class="bar"><div class="bar-inner" style="width:${value}%"></div></div>
+        `;
+        $("dimensions").appendChild(div);
+      });
+
+      $("downloadStatus").textContent = "";
+      show("resultPage");
+    }
+
+    function reset() {
+      state.screen = "home";
+      state.index = 0;
+      state.answers = Array(CONFIG.totalQuestions).fill(null);
+      state.result = null;
+      show("homePage");
+    }
+
+    const CANVAS_FONT = '"PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif';
+
+    function setCanvasFont(ctx, weight, size) {
+      ctx.font = `${weight} ${size}px ${CANVAS_FONT}`;
+      ctx.textBaseline = "alphabetic";
+    }
+
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 99) {
+      const chars = String(text).split("");
+      let line = "";
+      let lines = 0;
+      for (let i = 0; i < chars.length; i += 1) {
+        const testLine = line + chars[i];
+        if (ctx.measureText(testLine).width > maxWidth && line) {
+          ctx.fillText(line, x, y);
+          y += lineHeight;
+          lines += 1;
+          line = chars[i];
+          if (lines >= maxLines - 1) break;
+        } else {
+          line = testLine;
+        }
+      }
+      if (line && lines < maxLines) {
+        ctx.fillText(line, x, y);
+        y += lineHeight;
+      }
+      return y;
+    }
+
+    function roundRect(ctx, x, y, width, height, radius) {
+      const r = Math.min(radius, width / 2, height / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + width, y, x + width, y + height, r);
+      ctx.arcTo(x + width, y + height, x, y + height, r);
+      ctx.arcTo(x, y + height, x, y, r);
+      ctx.arcTo(x, y, x + width, y, r);
+      ctx.closePath();
+    }
+
+    function isSameOriginOrRelative(src) {
+      try {
+        const url = new URL(src, window.location.href);
+        return url.origin === window.location.origin;
+      } catch (e) {
+        return true;
+      }
+    }
+
+    function loadImage(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        // 关键修复：同源/相对路径图片不要设置 crossOrigin。
+        // 否则部分服务器没有返回 CORS 头时，图片页面能显示，但 Canvas 会加载失败。
+        // 如果你用外链图片，下载结果卡可能仍然失败，最好把图片放到本站 assets 目录。
+        if (!isSameOriginOrRelative(src)) img.crossOrigin = "anonymous";
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+      });
+    }
+
+    function drawCoverImage(ctx, img, x, y, w, h, fit = "cover") {
+      const ratio = fit === "contain" ? Math.min(w / img.width, h / img.height) : Math.max(w / img.width, h / img.height);
+      const iw = img.width * ratio;
+      const ih = img.height * ratio;
+      ctx.drawImage(img, x + (w - iw) / 2, y + (h - ih) / 2, iw, ih);
+    }
+
+    function drawImageFallback(ctx, r, x, y, w, h) {
+      ctx.fillStyle = r.color;
+      roundRect(ctx, x, y, w, h, 32);
+      ctx.fill();
+      ctx.fillStyle = "rgba(255,255,255,0.92)";
+      setCanvasFont(ctx, 800, 60);
+      ctx.fillText(r.shortName, x + 58, y + h * 0.42);
+      setCanvasFont(ctx, 500, 30);
+      ctx.fillText("角色图资源待配置", x + 58, y + h * 0.42 + 54);
+    }
+
+    function createCardCanvas(result, options = { includeImage: true }) {
+      const r = result.type;
+      const canvas = document.createElement("canvas");
+      const width = 900;
+      const height = 1600;
+      const scale = 2;
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      const ctx = canvas.getContext("2d");
+      ctx.scale(scale, scale);
+
+      const imgX = 86;
+      const imgY = 86;
+      const imgW = 728;
+      const imgH = 760;
+
+      function drawBase() {
+        ctx.fillStyle = "#f5faf4";
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.fillStyle = "#ffffff";
+        roundRect(ctx, 48, 48, 804, 1504, 42);
+        ctx.fill();
+        ctx.strokeStyle = "#d8eadb";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+
+      function drawTextBlocks() {
+        const grad = ctx.createLinearGradient(0, imgY + imgH - 240, 0, imgY + imgH);
+        grad.addColorStop(0, "rgba(0,0,0,0)");
+        grad.addColorStop(1, "rgba(0,0,0,0.74)");
+        ctx.save();
+        roundRect(ctx, imgX, imgY, imgW, imgH, 34);
+        ctx.clip();
+        ctx.fillStyle = grad;
+        ctx.fillRect(imgX, imgY + imgH - 270, imgW, 270);
+        ctx.fillStyle = "#ffffff";
+        setCanvasFont(ctx, 800, 38);
+        wrapText(ctx, r.quote, imgX + 44, imgY + imgH - 108, imgW - 88, 50, 2);
+        ctx.restore();
+
+        // 主类型卡片：加高卡片，并让“匹配度”跟随角色名换行后的实际高度。
+        const typeCardY = 886;
+        const typeCardH = 250;
+        ctx.fillStyle = "#ffffff";
+        roundRect(ctx, 86, typeCardY, 728, typeCardH, 30);
+        ctx.fill();
+        ctx.strokeStyle = "#d8eadb";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        ctx.fillStyle = "#6a7d70";
+        setCanvasFont(ctx, 700, 27);
+        ctx.fillText("你的主类型", 126, typeCardY + 62);
+
+        ctx.fillStyle = "#17251d";
+        setCanvasFont(ctx, 800, 46);
+        const afterNameY = wrapText(ctx, r.displayName, 126, typeCardY + 132, 650, 56, 2);
+
+        const pillX = 126;
+        const pillY = Math.min(afterNameY + 4, typeCardY + typeCardH - 68);
+        const pillW = 206;
+        const pillH = 58;
+        ctx.fillStyle = "#e9f5eb";
+        roundRect(ctx, pillX, pillY, pillW, pillH, pillH / 2);
+        ctx.fill();
+        ctx.fillStyle = "#4d7058";
+        setCanvasFont(ctx, 800, 28);
+        ctx.fillText(`匹配度 ${result.match}%`, pillX + 24, pillY + 38);
+
+        // 解读卡片。
+        const descY = 1170;
+        ctx.fillStyle = "#ffffff";
+        roundRect(ctx, 86, descY, 728, 284, 30);
+        ctx.fill();
+        ctx.strokeStyle = "#d8eadb";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        ctx.fillStyle = "#17251d";
+        setCanvasFont(ctx, 800, 31);
+        ctx.fillText("该人格的简单解读", 126, descY + 66);
+        ctx.fillStyle = "#435349";
+        setCanvasFont(ctx, 500, 27);
+        wrapText(ctx, r.summary, 126, descY + 126, 650, 43, 5);
+
+        ctx.fillStyle = "#6a7d70";
+        setCanvasFont(ctx, 500, 23);
+        ctx.fillText(`${CONFIG.brand}｜${CONFIG.slogan}`, 126, 1504);
+      }
+
+      drawBase();
+
+      ctx.save();
+      roundRect(ctx, imgX, imgY, imgW, imgH, 34);
+      ctx.clip();
+      ctx.fillStyle = r.color;
+      ctx.fillRect(imgX, imgY, imgW, imgH);
+      ctx.restore();
+
+      if (!options.includeImage) {
+        drawImageFallback(ctx, r, imgX, imgY, imgW, imgH);
+      }
+
+      return { canvas, ctx, imgX, imgY, imgW, imgH, drawTextBlocks, r };
+    }
+
+    function canvasToBlob(canvas) {
+      return new Promise((resolve, reject) => {
+        if (!canvas.toBlob) {
+          try {
+            const dataUrl = canvas.toDataURL("image/png");
+            resolve(dataURLToBlob(dataUrl));
+          } catch (e) {
+            reject(e);
+          }
+          return;
+        }
+        try {
+          canvas.toBlob((blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error("canvas.toBlob 返回空结果"));
+          }, "image/png", 0.95);
+        } catch (e) {
+          reject(e);
+        }
+      });
+    }
+
+    function dataURLToBlob(dataUrl) {
+      const parts = dataUrl.split(",");
+      const mime = parts[0].match(/:(.*?);/)[1];
+      const binary = atob(parts[1]);
+      const len = binary.length;
+      const array = new Uint8Array(len);
+      for (let i = 0; i < len; i += 1) array[i] = binary.charCodeAt(i);
+      return new Blob([array], { type: mime });
+    }
+
+    async function downloadCanvas(canvas, filename) {
+      const blob = await canvasToBlob(canvas);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    async function downloadResultCard() {
+      const result = state.result || calcResult();
+      const r = result.type;
+      const filename = `OOR人格测试-${r.shortName}.png`;
+      $("downloadStatus").textContent = "正在生成结果卡…";
+
+      // 关键修复：Canvas 一旦被跨域图片污染，clearRect 后仍然无法导出。
+      // 所以如果第一次导出失败，必须创建一个全新的 Canvas，生成无角色图版本。
+      try {
+        const card = createCardCanvas(result, { includeImage: true });
+        let imageDrawn = false;
+
+        try {
+          const img = await loadImage(r.image);
+          card.ctx.save();
+          roundRect(card.ctx, card.imgX, card.imgY, card.imgW, card.imgH, 34);
+          card.ctx.clip();
+          drawCoverImage(card.ctx, img, card.imgX, card.imgY, card.imgW, card.imgH, "cover");
+          card.ctx.restore();
+          imageDrawn = true;
+        } catch (e) {
+          imageDrawn = false;
+        }
+
+        if (!imageDrawn) {
+          drawImageFallback(card.ctx, r, card.imgX, card.imgY, card.imgW, card.imgH);
+        }
+
+        card.drawTextBlocks();
+        await downloadCanvas(card.canvas, filename);
+        $("downloadStatus").textContent = "结果卡已生成。如果浏览器没有自动下载，请长按图片保存。";
+      } catch (err) {
+        console.error("带图结果卡生成失败：", err);
+        try {
+          const safeCard = createCardCanvas(result, { includeImage: false });
+          safeCard.drawTextBlocks();
+          await downloadCanvas(safeCard.canvas, filename);
+          $("downloadStatus").textContent = "带图版本生成失败，已生成无角色图版本。请检查图片路径或服务器 MIME 类型。";
+        } catch (fallbackErr) {
+          console.error("无图结果卡生成失败：", fallbackErr);
+          const msg = fallbackErr && fallbackErr.message ? fallbackErr.message : String(fallbackErr);
+          $("downloadStatus").textContent = `生成失败：${msg}。请先截图保存当前结果页。`;
+        }
+      }
+    }
+
+    $("startBtn").addEventListener("click", () => {
+      renderQuestion();
+      show("testPage");
+    });
+
+    $("backHomeBtn").addEventListener("click", reset);
+
+    $("prevBtn").addEventListener("click", () => {
+      state.index = Math.max(0, state.index - 1);
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    $("submitBtn").addEventListener("click", renderResult);
+    $("closeResultBtn").addEventListener("click", reset);
+    $("restartBtn").addEventListener("click", reset);
+    $("downloadBtn").addEventListener("click", downloadResultCard);
+
+    $("groupBtn").addEventListener("click", () => {
+      $("groupModal").classList.remove("hidden");
+    });
+
+    $("closeGroupModalBtn").addEventListener("click", () => {
+      $("groupModal").classList.add("hidden");
+    });
+
+    $("groupModal").addEventListener("click", (event) => {
+      if (event.target.id === "groupModal") {
+        $("groupModal").classList.add("hidden");
+      }
+    });
+
+    $("groupQrImg").addEventListener("error", () => {
+      $("groupQrImg").style.display = "none";
+      $("groupQrFallback").style.display = "flex";
+    });
+  </script>
+</body>
+</html>
