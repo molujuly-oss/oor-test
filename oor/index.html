@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>ONE OK ROCK 人格测试｜游音视域</title>
   <meta name="description" content="测测你在 ONE OK ROCK 里是哪一种乐队灵魂，领取你的 OOR 人格。" />
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCNQEEZ8MY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-GCNQEEZ8MY");
+  </script>
+
   <style>
     :root {
       --bg: #f5faf4;
@@ -983,6 +992,15 @@
 
     const $ = (id) => document.getElementById(id);
 
+    function trackAnalyticsEvent(eventName, params = {}) {
+      if (typeof gtag === "function") {
+        gtag("event", eventName, {
+          page_name: "oor_personality_test",
+          ...params,
+        });
+      }
+    }
+
     function show(page) {
       ["homePage", "testPage", "resultPage"].forEach((id) => $(id).classList.add("hidden"));
       $(page).classList.remove("hidden");
@@ -1407,6 +1425,15 @@
     $("downloadBtn").addEventListener("click", downloadResultCard);
 
     $("groupBtn").addEventListener("click", () => {
+      trackAnalyticsEvent("oor_omamori_click", {
+        button_name: "result_second_button",
+        button_text: $("groupBtn").textContent.trim(),
+        result_id: state.result?.type?.id || "unknown",
+        result_type: state.result?.type?.shortName || "unknown",
+        result_name: state.result?.type?.displayName || "unknown",
+        match: state.result?.match || 0,
+      });
+
       $("groupModal").classList.remove("hidden");
     });
 
