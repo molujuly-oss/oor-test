@@ -641,6 +641,122 @@
       font-weight: 950;
     }
 
+
+
+    .omamori-modal-card {
+      text-align: left;
+      max-height: 86vh;
+      overflow: auto;
+    }
+
+    .modal-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 950;
+      margin-bottom: 12px;
+    }
+
+    .omamori-sign-card {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 22px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+    }
+
+    .omamori-sign-title {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .omamori-sign-quote {
+      margin-top: 10px;
+      color: var(--text);
+      font-size: 22px;
+      line-height: 1.42;
+      font-weight: 950;
+    }
+
+    .omamori-sign-text {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .goods-preview {
+      margin: 16px auto 0;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 24px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+    }
+
+    .goods-preview + .goods-preview {
+      margin-top: 12px;
+    }
+
+    .goods-preview img {
+      width: 100%;
+      height: auto;
+      max-height: 360px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .goods-fallback {
+      min-height: 160px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+      background: #fff;
+    }
+
+    .omamori-reason {
+      display: grid;
+      gap: 6px;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      background: #fff7e8;
+      color: #6f4b17;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .modal-primary-action,
+    .modal-secondary-action {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 14px;
+      border-radius: 18px;
+      font-weight: 950;
+    }
+
+    .modal-primary-action {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .modal-secondary-action {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
     .hidden { display: none !important; }
 
     @media (max-width: 360px) {
@@ -760,22 +876,29 @@
       <p id="downloadStatus" class="status"></p>
       <button id="shareBtn" class="group-btn share-btn">转发给朋友</button>
       <p id="shareStatus" class="status"></p>
-      <button id="groupBtn" class="group-btn">看看OOR同人御守</button>
-      <p class="small-note">taka保佑抽票必中~</p>
+      <button id="groupBtn" class="group-btn">查看我的人格对应御守</button>
+      <p class="small-note">不是普通周边，是把那首歌陪你撑过的情绪，系在身边。</p>
       <button id="restartBtn" class="secondary-btn" style="width: 100%; min-height: 56px; border-radius: 24px;">重新测试</button>
     </div>
   </div>
 
   <div id="groupModal" class="modal-mask hidden">
-    <div class="modal-card">
-      <div class="modal-title">OOR同人御守</div>
-      <p class="modal-desc"></p>
-      <div class="qr-box">
-        <img id="groupQrImg" src="./assets/goods.jpg" alt="QQ群二维码" />
-        <div id="groupQrFallback" class="qr-fallback">二维码图片未找到。请把 QQ 群二维码放到：<br />assets/group/qq-group.png</div>
+    <div class="modal-card omamori-modal-card">
+      <div class="modal-eyebrow">OOR 同人御守实拍</div>
+      <div id="modalResultName" class="modal-title">查看实拍图</div>
+
+      <div class="goods-preview">
+        <img id="groupQrImg" src="./assets/goods.jpg" alt="OOR 同人御守实拍图 1" />
+        <div id="groupQrFallback" class="goods-fallback">商品图片未找到。请把第一张实拍图放到：<br />assets/goods.jpg</div>
       </div>
-      <p class="modal-tip">【小红书】ONEOKROCK御守taka款 😆 YnL68VudAq 😆 https://xhslink.com/m/5iE3OeOaiT7 点击链接或者复制本条信息打开【小红书app】查看 CA4852</p>
-      <button id="closeGroupModalBtn" class="modal-close">我知道了</button>
+
+      <div class="goods-preview">
+        <img id="groupQrImg2" src="./assets/goods-2.jpg" alt="OOR 同人御守实拍图 2" />
+        <div id="groupQrFallback2" class="goods-fallback">商品图片未找到。请把第二张实拍图放到：<br />assets/goods-2.jpg</div>
+      </div>
+
+      <button id="buyWayBtn" class="modal-primary-action">查看实拍和购买方式</button>
+      <button id="closeGroupModalBtn" class="modal-close">暂时先不看</button>
     </div>
   </div>
 
@@ -785,6 +908,35 @@
       slogan: "把喜欢，系在身边",
       totalQuestions: 24,
     };
+    const OOR_OMAMORI_URL = "https://xhslink.com/m/5iE3OeOaiT7";
+
+    function getOmamoriCopy(result) {
+      const type = result?.type || TYPES.taka;
+      const copies = {
+        taka: {
+          title: "燃声型｜撑过今晚御守",
+          desc: "你测出的不是一个标签，而是一种听歌时反复出现的自己。你适合的是「撑过今晚」签：把那首歌陪你走过的夜晚，系在身边。",
+          sign: "不是每一次崩溃都需要被别人看见。有些夜晚，只要一首歌陪你撑过去就够了。",
+        },
+        toru: {
+          title: "掌舵型｜方向不偏航御守",
+          desc: "你习惯先看清方向，再带自己往前走。你适合的是「方向不偏航」签：把清醒、判断和继续前进的勇气，系在身边。",
+          sign: "你选择的方向没有错。别被眼前的小混乱拖住，你已经比自己想象中更接近远方。",
+        },
+        ryota: {
+          title: "低频型｜稳稳在场御守",
+          desc: "你不是最吵的那一声，却常常是让一切成立的底盘。你适合的是「稳稳在场」签：把安定、支撑和不被忽略的价值，系在身边。",
+          sign: "不是所有重要的东西都需要站在正中央。你撑住的东西，会在未来变成很深的安全感。",
+        },
+        tomoya: {
+          title: "节奏型｜找回自己节奏御守",
+          desc: "你最珍贵的地方，是能在混乱里重新找到节奏。你适合的是「找回自己节奏」签：把松弛、默契和继续合拍的能力，系在身边。",
+          sign: "今天不必把所有事情都逼到极限。跟着自己的鼓点走，适合你的节奏会带你回到自己。",
+        },
+      };
+      return copies[type.id] || copies.taka;
+    }
+
 
     const TYPES = {
       taka: {
@@ -1524,6 +1676,34 @@
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
+    function renderOmamoriModal() {
+      const result = state.result || calcResult();
+      const r = result.type;
+      const copy = getOmamoriCopy(result);
+
+      $("modalResultName").textContent = "OOR 同人御守实拍";
+      $("groupModal").classList.remove("hidden");
+
+      trackAnalyticsEvent("omamori_detail_view", {
+        button_name: "result_second_button",
+        modal_title: copy.title,
+        ...getResultAnalyticsParams(),
+      });
+    }
+
+    function goBuyWay() {
+      const result = state.result || calcResult();
+      const copy = getOmamoriCopy(result);
+      trackAnalyticsEvent("buy_way_click", {
+        button_name: "buy_way",
+        button_text: $("buyWayBtn").textContent.trim(),
+        modal_title: copy.title,
+        purchase_url: OOR_OMAMORI_URL,
+        ...getResultAnalyticsParams(),
+      });
+      window.location.href = OOR_OMAMORI_URL;
+    }
+
     async function downloadResultCard() {
       const result = state.result || calcResult();
       const r = result.type;
@@ -1606,8 +1786,10 @@
         match: state.result?.match || 0,
       });
 
-      window.location.href = "https://xhslink.com/m/5iE3OeOaiT7";
+      renderOmamoriModal();
     });
+
+    $("buyWayBtn").addEventListener("click", goBuyWay);
 
     $("closeGroupModalBtn").addEventListener("click", () => {
       $("groupModal").classList.add("hidden");
@@ -1622,6 +1804,11 @@
     $("groupQrImg").addEventListener("error", () => {
       $("groupQrImg").style.display = "none";
       $("groupQrFallback").style.display = "flex";
+    });
+
+    $("groupQrImg2").addEventListener("error", () => {
+      $("groupQrImg2").style.display = "none";
+      $("groupQrFallback2").style.display = "flex";
     });
   </script>
 </body>
