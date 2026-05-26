@@ -757,6 +757,33 @@
       border: 1px solid var(--line);
     }
 
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 6px;
+      border-radius: 999px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+    }
+
+    .lang-btn {
+      flex: 1;
+      min-height: 36px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .lang-btn.active {
+      background: var(--text);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(23, 37, 29, 0.12);
+    }
+
     .hidden { display: none !important; }
 
     @media (max-width: 360px) {
@@ -772,6 +799,12 @@
       <div class="badge">游音视域｜把喜欢，系在身边</div>
       <h1 class="home-title">ONE OK ROCK 人格测试</h1>
       <p class="home-subtitle">测测你在 OOR 里是哪一种乐队灵魂。</p>
+
+      <div class="lang-switch" aria-label="Language selector">
+        <button type="button" class="lang-btn" data-lang="zh">中文</button>
+        <button type="button" class="lang-btn" data-lang="en">English</button>
+        <button type="button" class="lang-btn" data-lang="ja">日本語</button>
+      </div>
 
       <div class="info-box">
         <p class="info-box-title">测试说明</p>
@@ -910,30 +943,1116 @@
     };
     const OOR_OMAMORI_URL = "https://xhslink.com/m/5iE3OeOaiT7";
 
+    const I18N = {
+      "zh": {
+            "ui": {
+                  "brand": "游音视域",
+                  "slogan": "把喜欢，系在身边",
+                  "htmlLang": "zh-CN",
+                  "title": "ONE OK ROCK 人格测试｜游音视域",
+                  "description": "测测你在 ONE OK ROCK 里是哪一种乐队灵魂，领取你的 OOR 人格。",
+                  "badge": "游音视域｜把喜欢，系在身边",
+                  "homeTitle": "ONE OK ROCK 人格测试",
+                  "homeSubtitle": "测测你在 OOR 里是哪一种乐队灵魂。",
+                  "infoTitle": "测试说明",
+                  "infoText": "共 24 题。凭第一感觉选择即可。完成后会得到你的 OOR 成员人格、匹配度和一支专属摇滚御签。",
+                  "startBtn": "开始测试",
+                  "aboutSummary": "关于游音视域",
+                  "aboutText": "我们是为动漫、游戏、音乐爱好者服务的情绪礼物品牌，把喜欢，系在身边。",
+                  "back": "返回",
+                  "prev": "上一题",
+                  "submit": "查看结果",
+                  "submitHint": "全选完后查看结果",
+                  "questionIndex": "第 {n} 题",
+                  "resultTopTitle": "ONE OK ROCK 人格测试",
+                  "mainType": "你的主类型",
+                  "match": "匹配度 {n}%",
+                  "simpleReading": "简单解读",
+                  "omikujiTitle": "你的御签",
+                  "goodLabel": "今日宜",
+                  "badLabel": "今日忌",
+                  "dimensionTitle": "六维度评分",
+                  "downloadBtn": "下载结果卡",
+                  "shareBtn": "转发给朋友",
+                  "groupBtn": "查看我的人格对应御守",
+                  "smallNote": "不是普通周边，是把那首歌陪你撑过的情绪，系在身边。",
+                  "restartBtn": "重新测试",
+                  "fallbackImage": "角色图资源待配置",
+                  "modalEyebrow": "OOR 同人御守实拍",
+                  "modalTitle": "OOR 同人御守实拍",
+                  "goodsFallback1": "商品图片未找到。请把第一张实拍图放到：\nassets/goods.jpg",
+                  "goodsFallback2": "商品图片未找到。请把第二张实拍图放到：\nassets/goods-2.jpg",
+                  "buyWayBtn": "查看实拍和购买方式",
+                  "closeModal": "暂时先不看",
+                  "qrLoading": "二维码加载中",
+                  "shareTitle": "ONE OK ROCK 人格测试｜游音视域",
+                  "shareText": "{result}来测测你在 OOR 里是哪一种乐队灵魂。",
+                  "shareResultPrefix": "我测出了 {type}，",
+                  "sharePanelOpened": "已打开系统分享面板。",
+                  "shareCopied": "链接已复制，可以粘贴发给朋友。",
+                  "shareCanceled": "分享未完成，可以重新点击按钮尝试。",
+                  "downloadGenerating": "正在生成结果卡…",
+                  "downloadDone": "结果卡已生成，底部二维码可扫码打开测试。如果浏览器没有自动下载，请长按图片保存。",
+                  "downloadImageFail": "带图版本生成失败，已生成无角色图版本。请检查图片路径或服务器 MIME 类型。",
+                  "downloadFail": "生成失败：{msg}。请先截图保存当前结果页。",
+                  "filenamePrefix": "OOR人格测试",
+                  "canvasMainType": "你的主类型",
+                  "canvasReading": "该人格的简单解读",
+                  "canvasQrTitle": "扫码打开测试",
+                  "canvasQrText": "扫码就能直接测自己的OOR人格哦~",
+                  "canvasQrFallback1": "扫码打开",
+                  "canvasQrFallback2": "测试"
+            },
+            "brand": "游音视域",
+            "slogan": "把喜欢，系在身边",
+            "types": {
+                  "taka": {
+                        "name": "TAKA (森内贵宽)",
+                        "displayName": "TAKA (森内贵宽)",
+                        "shortName": "TAKA 型",
+                        "quote": "你的心里有火，声音只是它冲出来的方式。",
+                        "summary": "你是那种情绪浓度很高的人。你不一定总是外放，但真正被触动时，会爆发出很强的感染力。你适合把经历、痛感和热爱转化成表达，也常常能让别人因为你的真诚而重新燃起来。",
+                        "longText": "你的人格核心是“把真实说出来”。你讨厌虚假的轻松，也不喜欢把重要的感受糊弄过去。你可能会比别人更容易感到不甘、焦虑或被击中，但这也让你拥有很强的生命力。对你来说，成长不是变得没有情绪，而是学会让情绪成为作品、行动和答案。",
+                        "omikuji": {
+                              "title": "第壹番｜燃声签",
+                              "text": "不要急着把心里的火按灭。它有时会灼伤你，但也会照亮你。今天适合把没说出口的话，变成一次认真表达。",
+                              "good": "坦白表达、重新开始",
+                              "bad": "假装没事、压住热爱"
+                        }
+                  },
+                  "toru": {
+                        "name": "TORU (山下亨)",
+                        "displayName": "TORU (山下亨)",
+                        "shortName": "TORU 型",
+                        "quote": "你不是站在最吵的位置，却决定了大家要去哪里。",
+                        "summary": "你有很强的方向感和责任意识。你擅长观察局势、整理混乱，也愿意在关键时刻承担决定。你未必每次都把情绪放在脸上，但你会用行动告诉别人：跟我走，别散。",
+                        "longText": "你的人格核心是“把可能性带到更远处”。你不喜欢原地打转，也很难忍受没有计划的消耗。你适合做组织者、推进者和长期主义者。只是你也要记得，不是所有关系都需要被安排得很完美。有时候，让别人看见你的柔软，也是一种领导力。",
+                        "omikuji": {
+                              "title": "第玖番｜掌舵签",
+                              "text": "你已经看见远方了，所以不要被眼前的小混乱拖住。今天适合做决定、定方向，也适合相信自己的判断。",
+                              "good": "制定计划、带人前进",
+                              "bad": "独自扛下所有压力"
+                        }
+                  },
+                  "ryota": {
+                        "name": "RYOTA (小浜良太)",
+                        "displayName": "RYOTA (小浜良太)",
+                        "shortName": "RYOTA 型",
+                        "quote": "真正让一首歌站住的，常常不是最响的那一声。",
+                        "summary": "你是低调但非常重要的人。你不一定急着抢镜，却能在关系和团队里提供稳定的支撑。你的力量不是压迫感，而是一种让人安心的存在感。",
+                        "longText": "你的人格核心是“稳稳地在场”。你擅长把复杂的事情变简单，也擅长在别人慌乱时保持可靠。你可能偶尔会觉得自己不够耀眼，但很多时候，别人能自由发光，是因为你把底盘撑住了。不要低估自己的重量，你的温柔和稳定，本身就是很稀有的能力。",
+                        "omikuji": {
+                              "title": "第拾伍番｜低频签",
+                              "text": "不是所有重要的东西都需要站在正中央。你撑住的日常、关系和承诺，会在未来变成别人心里很深的安全感。",
+                              "good": "稳住节奏、照顾自己",
+                              "bad": "因为低调就否定价值"
+                        }
+                  },
+                  "tomoya": {
+                        "name": "TOMOYA (神吉智也)",
+                        "displayName": "TOMOYA (神吉智也)",
+                        "shortName": "TOMOYA 型",
+                        "quote": "你的节奏一响，世界就没那么紧绷了。",
+                        "summary": "你是能把气氛重新调顺的人。你有幽默感、松弛感，也有很强的节奏直觉。你未必总是严肃地解决问题，但你很擅长让人从紧绷里回到当下。",
+                        "longText": "你的人格核心是“让一切重新合拍”。你知道什么时候该用力，什么时候该放松；也知道一个团队不能只靠冲刺，还需要呼吸、玩笑和默契。你看似轻松，其实很敏锐。你的存在会提醒大家：别只顾着抵达，也要记得享受一起演奏的过程。",
+                        "omikuji": {
+                              "title": "第贰拾番｜节奏签",
+                              "text": "今天不必把所有事情都逼到极限。跟着自己的鼓点走，慢一点也没关系。真正适合你的节奏，会把你带回正确的位置。",
+                              "good": "放松一点、找回手感",
+                              "bad": "被别人的节奏牵着跑"
+                        }
+                  }
+            },
+            "dimensions": [
+                  "情绪爆发",
+                  "方向感",
+                  "支撑力",
+                  "节奏感",
+                  "冲刺感",
+                  "松弛度"
+            ],
+            "questions": [
+                  {
+                        "text": "面对一件你很在意的事，你通常会怎么开始？",
+                        "options": [
+                              "先把情绪点燃，确认自己真的想要",
+                              "先判断方向，决定这件事值不值得投入",
+                              "先把基础打稳，不急着出头",
+                              "先找到节奏，让自己慢慢进入状态"
+                        ]
+                  },
+                  {
+                        "text": "你在团队里最自然的位置是？",
+                        "options": [
+                              "把大家的情绪带起来的人",
+                              "看清目标、带人往前走的人",
+                              "不抢镜但一直托住底盘的人",
+                              "稳住节奏、让大家安心发挥的人"
+                        ]
+                  },
+                  {
+                        "text": "如果要登上一个很大的舞台，你最在意什么？",
+                        "options": [
+                              "能不能把真实的自己唱出去",
+                              "整场演出的走向和完成度",
+                              "自己有没有稳稳撑住该撑的部分",
+                              "现场节奏是不是舒服又有力量"
+                        ]
+                  },
+                  {
+                        "text": "朋友低落时，你更可能怎么做？",
+                        "options": [
+                              "用很直接的话把 TA 拉回现实：你还可以",
+                              "帮 TA 分析下一步该怎么走",
+                              "安静陪着，给 TA 一个可靠的后方",
+                              "用轻松的方式让 TA 先笑出来"
+                        ]
+                  },
+                  {
+                        "text": "你最害怕哪种状态？",
+                        "options": [
+                              "明明有很多情绪，却说不出来",
+                              "一群人努力，但方向是乱的",
+                              "自己成了团队里不稳定的那一环",
+                              "节奏被打乱，怎么都找不回感觉"
+                        ]
+                  },
+                  {
+                        "text": "你更相信哪种成长？",
+                        "options": [
+                              "把痛苦变成声音",
+                              "把野心变成计划",
+                              "把普通练习变成肌肉记忆",
+                              "把重复的日子敲出新的节拍"
+                        ]
+                  },
+                  {
+                        "text": "被别人夸奖时，你最想听到的是？",
+                        "options": [
+                              "你真的很有感染力",
+                              "有你在，大家就知道往哪走",
+                              "你虽然低调，但少了你不行",
+                              "你让整个气氛都稳下来了"
+                        ]
+                  },
+                  {
+                        "text": "你做决定时更像？",
+                        "options": [
+                              "先问自己的心有没有被点燃",
+                              "先看这一步会把我带去哪里",
+                              "先确认我能不能持续承担",
+                              "先感受当下节奏对不对"
+                        ]
+                  },
+                  {
+                        "text": "如果生活是一首歌，你希望自己是哪一部分？",
+                        "options": [
+                              "最让人起鸡皮疙瘩的主唱段",
+                              "推着整首歌前进的吉他线",
+                              "不明显但一直让歌成立的低频",
+                              "让所有人一起点头的鼓点"
+                        ]
+                  },
+                  {
+                        "text": "你面对压力时的第一反应是？",
+                        "options": [
+                              "咬牙顶上去，越痛越要证明",
+                              "冷静下来，重新排优先级",
+                              "不慌，把自己该做的部分做好",
+                              "先稳住呼吸，再找回节奏"
+                        ]
+                  },
+                  {
+                        "text": "你喜欢怎样的关系？",
+                        "options": [
+                              "可以坦白、激烈、真诚地靠近",
+                              "彼此信任，也能一起往前冲",
+                              "不必多说，但知道对方一直在",
+                              "相处舒服，有笑点也有默契"
+                        ]
+                  },
+                  {
+                        "text": "当你开始喜欢一个作品或乐队，你最容易被什么打中？",
+                        "options": [
+                              "声音里的情绪和爆发",
+                              "整体气质、舞台布局和野心",
+                              "那些越听越重要的细节",
+                              "现场的律动和成员之间的松弛感"
+                        ]
+                  },
+                  {
+                        "text": "如果你要给自己一句鼓励，会选？",
+                        "options": [
+                              "把心里的火唱出来",
+                              "别偏航，继续往更大的地方走",
+                              "稳住，你已经撑过很多次了",
+                              "别急，跟上自己的节奏"
+                        ]
+                  },
+                  {
+                        "text": "你最讨厌别人误解你哪一点？",
+                        "options": [
+                              "以为我只是情绪化，其实我很认真",
+                              "以为我太强势，其实我只是不想散掉",
+                              "以为我没存在感，其实我一直在输出",
+                              "以为我太随和，其实我很清楚节奏"
+                        ]
+                  },
+                  {
+                        "text": "你更向往哪种舞台瞬间？",
+                        "options": [
+                              "全场一起大合唱，情绪冲到顶点",
+                              "灯光亮起，所有安排刚好落位",
+                              "一个低频进入，整首歌突然有了重量",
+                              "鼓点一响，所有人同时被带起来"
+                        ]
+                  },
+                  {
+                        "text": "你处理冲突时更像？",
+                        "options": [
+                              "直接说开，不喜欢憋着",
+                              "先控制局面，再谈感受",
+                              "少说狠话，先把关系撑住",
+                              "先缓和气氛，别让场面失控"
+                        ]
+                  },
+                  {
+                        "text": "你最容易在哪个瞬间燃起来？",
+                        "options": [
+                              "有人说“不可能”的时候",
+                              "看到更大的目标在前面的时候",
+                              "发现自己的坚持终于有意义的时候",
+                              "一切突然合拍的时候"
+                        ]
+                  },
+                  {
+                        "text": "如果你是一种能量，你更像？",
+                        "options": [
+                              "火花，刺眼但真实",
+                              "风向，安静却决定去处",
+                              "地基，不显眼但承重",
+                              "心跳，稳定又有生命力"
+                        ]
+                  },
+                  {
+                        "text": "你最想守护自己的哪一面？",
+                        "options": [
+                              "还愿意热烈表达的自己",
+                              "还敢规划远方的自己",
+                              "还愿意默默坚持的自己",
+                              "还保有轻松和幽默的自己"
+                        ]
+                  },
+                  {
+                        "text": "如果你要完成一件长期目标，你靠什么撑住？",
+                        "options": [
+                              "不甘心和热爱",
+                              "清晰的方向和自我要求",
+                              "每天一点点的稳定积累",
+                              "能让自己持续下去的节奏"
+                        ]
+                  },
+                  {
+                        "text": "你觉得“强大”更接近什么？",
+                        "options": [
+                              "经历过崩溃，还是能开口唱",
+                              "能带着别人一起走向更远处",
+                              "不用证明，也能让人安心",
+                              "再混乱也能把节奏找回来"
+                        ]
+                  },
+                  {
+                        "text": "你在喜欢的人面前更容易变成？",
+                        "options": [
+                              "很真、很直接、藏不住",
+                              "想变得更可靠，也更有担当",
+                              "默默照顾对方的习惯和细节",
+                              "想让对方轻松，想逗对方笑"
+                        ]
+                  },
+                  {
+                        "text": "如果抽到一支签，你希望它告诉你？",
+                        "options": [
+                              "你的声音值得被听见",
+                              "你选择的方向没有错",
+                              "你撑住的东西会开花",
+                              "你的节奏会带你回到自己"
+                        ]
+                  },
+                  {
+                        "text": "最后，你希望自己成为哪种人？",
+                        "options": [
+                              "热烈、真诚、把痛苦也唱成光的人",
+                              "清醒、坚定、能带人去远方的人",
+                              "温柔、稳定、在背后撑住一切的人",
+                              "松弛、有趣、让世界重新合拍的人"
+                        ]
+                  }
+            ],
+            "omamoriCopies": {
+                  "taka": {
+                        "title": "燃声型｜撑过今晚御守",
+                        "desc": "你测出的不是一个标签，而是一种听歌时反复出现的自己。你适合的是「撑过今晚」签：把那首歌陪你走过的夜晚，系在身边。",
+                        "sign": "不是每一次崩溃都需要被别人看见。有些夜晚，只要一首歌陪你撑过去就够了。"
+                  },
+                  "toru": {
+                        "title": "掌舵型｜方向不偏航御守",
+                        "desc": "你习惯先看清方向，再带自己往前走。你适合的是「方向不偏航」签：把清醒、判断和继续前进的勇气，系在身边。",
+                        "sign": "你选择的方向没有错。别被眼前的小混乱拖住，你已经比自己想象中更接近远方。"
+                  },
+                  "ryota": {
+                        "title": "低频型｜稳稳在场御守",
+                        "desc": "你不是最吵的那一声，却常常是让一切成立的底盘。你适合的是「稳稳在场」签：把安定、支撑和不被忽略的价值，系在身边。",
+                        "sign": "不是所有重要的东西都需要站在正中央。你撑住的东西，会在未来变成很深的安全感。"
+                  },
+                  "tomoya": {
+                        "title": "节奏型｜找回自己节奏御守",
+                        "desc": "你最珍贵的地方，是能在混乱里重新找到节奏。你适合的是「找回自己节奏」签：把松弛、默契和继续合拍的能力，系在身边。",
+                        "sign": "今天不必把所有事情都逼到极限。跟着自己的鼓点走，适合你的节奏会带你回到自己。"
+                  }
+            }
+      },
+      "en": {
+            "ui": {
+                  "brand": "YNSK",
+                  "slogan": "Keep what you love close",
+                  "htmlLang": "en",
+                  "title": "ONE OK ROCK Personality Test | YNSK",
+                  "description": "Find out which ONE OK ROCK band-soul type you are and get your OOR result.",
+                  "badge": "YNSK｜Keep what you love close",
+                  "homeTitle": "ONE OK ROCK Personality Test",
+                  "homeSubtitle": "Find out which OOR band-soul type you are.",
+                  "infoTitle": "How it works",
+                  "infoText": "24 questions. Follow your first instinct. At the end, you’ll get your OOR member type, match score, and a rock omikuji.",
+                  "startBtn": "Start test",
+                  "aboutSummary": "About YNSK",
+                  "aboutText": "We make emotional gifts for anime, game, and music fans — keeping what you love close.",
+                  "back": "Back",
+                  "prev": "Previous",
+                  "submit": "See result",
+                  "submitHint": "Answer all questions to see your result",
+                  "questionIndex": "Question {n}",
+                  "resultTopTitle": "ONE OK ROCK Personality Test",
+                  "mainType": "Your main type",
+                  "match": "Match {n}%",
+                  "simpleReading": "Simple reading",
+                  "omikujiTitle": "Your omikuji",
+                  "goodLabel": "Good today",
+                  "badLabel": "Avoid today",
+                  "dimensionTitle": "Six dimensions",
+                  "downloadBtn": "Download result card",
+                  "shareBtn": "Share with friends",
+                  "groupBtn": "View the omamori for my type",
+                  "smallNote": "Not just ordinary merch — it keeps the emotion of the songs that helped you through, close to you.",
+                  "restartBtn": "Retake test",
+                  "fallbackImage": "Member image not configured",
+                  "modalEyebrow": "OOR fan-made omamori photos",
+                  "modalTitle": "OOR fan-made omamori photos",
+                  "goodsFallback1": "Product image missing. Please put the first photo at:\nassets/goods.jpg",
+                  "goodsFallback2": "Product image missing. Please put the second photo at:\nassets/goods-2.jpg",
+                  "buyWayBtn": "View photos and how to buy",
+                  "closeModal": "Maybe later",
+                  "qrLoading": "Loading QR code",
+                  "shareTitle": "ONE OK ROCK Personality Test | YNSK",
+                  "shareText": "{result}Find out which OOR band-soul type you are.",
+                  "shareResultPrefix": "I got {type}. ",
+                  "sharePanelOpened": "System share panel opened.",
+                  "shareCopied": "Link copied. You can paste it to a friend.",
+                  "shareCanceled": "Share was not completed. You can tap again to retry.",
+                  "downloadGenerating": "Generating result card…",
+                  "downloadDone": "Result card generated. The QR code at the bottom opens the test. If it does not download automatically, long-press the image to save.",
+                  "downloadImageFail": "Image version failed. A no-image version has been generated. Please check image paths or server MIME type.",
+                  "downloadFail": "Generation failed: {msg}. Please screenshot this result page instead.",
+                  "filenamePrefix": "OOR-personality-test",
+                  "canvasMainType": "Your main type",
+                  "canvasReading": "Simple reading",
+                  "canvasQrTitle": "Scan to open test",
+                  "canvasQrText": "Scan the QR code to take your own OOR personality test.",
+                  "canvasQrFallback1": "Scan to",
+                  "canvasQrFallback2": "open test"
+            },
+            "brand": "YNSK",
+            "slogan": "Keep what you love close",
+            "types": {
+                  "taka": {
+                        "name": "TAKA",
+                        "displayName": "TAKA",
+                        "shortName": "TAKA type",
+                        "quote": "There is fire in your heart; your voice is simply how it escapes.",
+                        "summary": "Your emotions run deep. You may not always be loud, but when something truly moves you, your impact is powerful. You are good at turning experience, pain, and love into expression, and your sincerity can reignite other people too.",
+                        "longText": "Your core is speaking the truth. You dislike fake ease and hate brushing important feelings aside. You may feel frustration, anxiety, or impact more strongly than others, but that is also where your vitality comes from. Growth for you is not becoming emotionless; it is learning to turn emotion into art, action, and answers.",
+                        "omikuji": {
+                              "title": "No. 1｜Voice of Fire",
+                              "text": "Do not rush to put out the fire in your heart. Sometimes it burns you, but it also lights the way. Today is good for turning what you have not said into an honest expression.",
+                              "good": "Speak honestly; begin again",
+                              "bad": "Pretending you are fine; suppressing love"
+                        }
+                  },
+                  "toru": {
+                        "name": "TORU",
+                        "displayName": "TORU",
+                        "shortName": "TORU type",
+                        "quote": "You are not always in the loudest spot, but you decide where everyone is going.",
+                        "summary": "You have a strong sense of direction and responsibility. You observe situations, organize chaos, and are willing to make decisions at crucial moments. You may not show every emotion, but your actions say: follow me, do not scatter.",
+                        "longText": "Your core is carrying possibilities farther. You dislike staying in place, and you find aimless effort exhausting. You suit the role of organizer, driver, and long-term thinker. Just remember: not every relationship needs perfect management. Letting people see your softness can also be leadership.",
+                        "omikuji": {
+                              "title": "No. 9｜Compass",
+                              "text": "You have already seen the distance, so do not let small chaos trap you. Today is good for decisions, direction, and trusting your judgment.",
+                              "good": "Make a plan; lead forward",
+                              "bad": "Carrying all pressure alone"
+                        }
+                  },
+                  "ryota": {
+                        "name": "RYOTA",
+                        "displayName": "RYOTA",
+                        "shortName": "RYOTA type",
+                        "quote": "What makes a song stand is often not the loudest sound.",
+                        "summary": "You are low-key but deeply important. You do not rush for the spotlight, yet you provide steady support in relationships and teams. Your strength is not pressure; it is the kind of presence that lets people feel safe.",
+                        "longText": "Your core is being steadily present. You simplify complicated things and stay reliable when others panic. You may sometimes feel you are not dazzling enough, but often, others can shine freely because you hold the base. Do not underestimate your weight. Your warmth and steadiness are rare gifts.",
+                        "omikuji": {
+                              "title": "No. 15｜Low Frequency",
+                              "text": "Not everything important needs to stand in the center. The daily support, relationships, and promises you hold will become deep safety for someone in the future.",
+                              "good": "Stay steady; care for yourself",
+                              "bad": "Denying your value because you are quiet"
+                        }
+                  },
+                  "tomoya": {
+                        "name": "TOMOYA",
+                        "displayName": "TOMOYA",
+                        "shortName": "TOMOYA type",
+                        "quote": "When your rhythm starts, the world feels less tense.",
+                        "summary": "You are the person who can set the mood right again. You have humor, ease, and a strong instinct for rhythm. You may not solve everything in a serious way, but you are good at bringing people back from tension into the present.",
+                        "longText": "Your core is making things fall back into rhythm. You know when to push and when to loosen up. A team cannot live on sprinting alone; it also needs breath, jokes, and chemistry. You may look relaxed, but you are very perceptive. Your presence reminds people not only to arrive, but to enjoy playing together.",
+                        "omikuji": {
+                              "title": "No. 20｜Rhythm",
+                              "text": "You do not have to push everything to the limit today. Follow your own beat. Even if you move slowly, the rhythm that fits you will bring you back to the right place.",
+                              "good": "Relax a little; regain your feel",
+                              "bad": "Being dragged by someone else’s rhythm"
+                        }
+                  }
+            },
+            "dimensions": [
+                  "Emotional burst",
+                  "Direction",
+                  "Support",
+                  "Rhythm",
+                  "Drive",
+                  "Ease"
+            ],
+            "questions": [
+                  {
+                        "text": "When you start something that really matters to you, what do you do first?",
+                        "options": [
+                              "Light the emotion first and make sure I truly want it",
+                              "Check the direction and decide whether it is worth my energy",
+                              "Build the foundation first and avoid rushing to the front",
+                              "Find my rhythm and ease into it step by step"
+                        ]
+                  },
+                  {
+                        "text": "What role do you naturally take in a team?",
+                        "options": [
+                              "The one who lifts everyone’s emotions",
+                              "The one who sees the goal and leads people forward",
+                              "The one who does not seek attention but holds the base",
+                              "The one who keeps the rhythm steady so everyone can perform"
+                        ]
+                  },
+                  {
+                        "text": "If you were about to step onto a huge stage, what would matter most?",
+                        "options": [
+                              "Whether I can let my real self come through",
+                              "The overall flow and completion of the performance",
+                              "Whether I can steadily support my part",
+                              "Whether the live rhythm feels comfortable and powerful"
+                        ]
+                  },
+                  {
+                        "text": "When a friend is down, what are you most likely to do?",
+                        "options": [
+                              "Say something direct to pull them back: you still can",
+                              "Help them figure out the next step",
+                              "Stay quietly by their side and give them a safe backline",
+                              "Make them laugh first and loosen the mood"
+                        ]
+                  },
+                  {
+                        "text": "Which state scares you the most?",
+                        "options": [
+                              "Having many feelings but not being able to say them",
+                              "Everyone is trying hard, but the direction is a mess",
+                              "Becoming the unstable part of the team",
+                              "Losing the rhythm and not knowing how to get it back"
+                        ]
+                  },
+                  {
+                        "text": "What kind of growth do you believe in more?",
+                        "options": [
+                              "Turning pain into a voice",
+                              "Turning ambition into a plan",
+                              "Turning ordinary practice into muscle memory",
+                              "Turning repeated days into a new beat"
+                        ]
+                  },
+                  {
+                        "text": "What compliment would you most want to hear?",
+                        "options": [
+                              "You are truly infectious",
+                              "With you here, everyone knows where to go",
+                              "You are low-key, but the team cannot work without you",
+                              "You make the whole atmosphere feel steady"
+                        ]
+                  },
+                  {
+                        "text": "When making a decision, you are more likely to…",
+                        "options": [
+                              "Ask whether my heart is lit up by it",
+                              "Look at where this step will take me",
+                              "Check whether I can keep carrying it",
+                              "Feel whether the timing and rhythm are right"
+                        ]
+                  },
+                  {
+                        "text": "If life were a song, which part would you want to be?",
+                        "options": [
+                              "The vocal line that gives people goosebumps",
+                              "The guitar line that pushes the song forward",
+                              "The low end that quietly makes the song stand",
+                              "The drumbeat that makes everyone nod along"
+                        ]
+                  },
+                  {
+                        "text": "What is your first reaction under pressure?",
+                        "options": [
+                              "Face it head-on; the harder it hurts, the more I want to prove it",
+                              "Calm down and reset priorities",
+                              "Do my part steadily without panicking",
+                              "Stabilize my breathing first, then find the rhythm again"
+                        ]
+                  },
+                  {
+                        "text": "What kind of relationship do you like?",
+                        "options": [
+                              "A relationship where we can be honest, intense, and sincere",
+                              "Mutual trust, and the ability to move forward together",
+                              "No need for many words, but we know we are there",
+                              "Comfortable, funny, and full of quiet understanding"
+                        ]
+                  },
+                  {
+                        "text": "When you start loving a work or a band, what hits you first?",
+                        "options": [
+                              "The emotion and explosion in the voice",
+                              "The overall style, stage design, and ambition",
+                              "The details that become more important the more I listen",
+                              "The live groove and the relaxed chemistry between members"
+                        ]
+                  },
+                  {
+                        "text": "If you had to give yourself one line of encouragement, which would it be?",
+                        "options": [
+                              "Sing the fire in your heart",
+                              "Do not drift off course; keep going farther",
+                              "Hold steady. You have already made it through so much",
+                              "Do not rush. Follow your own rhythm"
+                        ]
+                  },
+                  {
+                        "text": "What misunderstanding of you bothers you most?",
+                        "options": [
+                              "Thinking I am just emotional, when I am actually serious",
+                              "Thinking I am too forceful, when I just do not want things to fall apart",
+                              "Thinking I have no presence, when I am always contributing",
+                              "Thinking I am just easygoing, when I know the rhythm clearly"
+                        ]
+                  },
+                  {
+                        "text": "Which stage moment do you long for most?",
+                        "options": [
+                              "The whole crowd singing along as the emotion peaks",
+                              "The lights come up and every arrangement lands perfectly",
+                              "The bass enters and the whole song suddenly has weight",
+                              "The drums hit and everyone is pulled in at once"
+                        ]
+                  },
+                  {
+                        "text": "How do you handle conflict?",
+                        "options": [
+                              "Say it directly; I do not like holding it in",
+                              "Control the situation first, then talk about feelings",
+                              "Avoid harsh words and hold the relationship together first",
+                              "Ease the mood first so the scene does not spiral"
+                        ]
+                  },
+                  {
+                        "text": "When do you ignite most easily?",
+                        "options": [
+                              "When someone says it is impossible",
+                              "When I see a bigger goal ahead",
+                              "When I realize my persistence finally meant something",
+                              "When everything suddenly clicks into rhythm"
+                        ]
+                  },
+                  {
+                        "text": "If you were a kind of energy, what would you be?",
+                        "options": [
+                              "A spark: sharp, bright, and real",
+                              "A wind direction: quiet but deciding where to go",
+                              "A foundation: not flashy, but weight-bearing",
+                              "A heartbeat: steady and alive"
+                        ]
+                  },
+                  {
+                        "text": "Which part of yourself do you most want to protect?",
+                        "options": [
+                              "The self that is still willing to express things passionately",
+                              "The self that still dares to plan for somewhere far away",
+                              "The self that still quietly persists",
+                              "The self that still keeps ease and humor"
+                        ]
+                  },
+                  {
+                        "text": "What keeps you going toward a long-term goal?",
+                        "options": [
+                              "Unwillingness to give up and love for it",
+                              "A clear direction and self-discipline",
+                              "A little bit of steady accumulation every day",
+                              "A rhythm that lets me keep going"
+                        ]
+                  },
+                  {
+                        "text": "What does “strength” feel closest to?",
+                        "options": [
+                              "Breaking down, but still being able to sing",
+                              "Taking others toward somewhere farther",
+                              "Making people feel safe without proving anything",
+                              "Finding the rhythm again even in chaos"
+                        ]
+                  },
+                  {
+                        "text": "Around someone you like, you tend to become…",
+                        "options": [
+                              "Very real, direct, and unable to hide it",
+                              "More reliable and more responsible",
+                              "Someone who quietly notices habits and details",
+                              "Someone who wants them to relax and laugh"
+                        ]
+                  },
+                  {
+                        "text": "If you drew an omikuji, what would you want it to tell you?",
+                        "options": [
+                              "Your voice deserves to be heard",
+                              "The direction you chose is not wrong",
+                              "What you held up will bloom",
+                              "Your rhythm will bring you back to yourself"
+                        ]
+                  },
+                  {
+                        "text": "Finally, what kind of person do you hope to become?",
+                        "options": [
+                              "Someone passionate and sincere, who can turn pain into light",
+                              "Someone clear and firm, who can lead people toward the distance",
+                              "Someone gentle and stable, who supports everything from behind",
+                              "Someone relaxed and fun, who makes the world fall back into rhythm"
+                        ]
+                  }
+            ],
+            "omamoriCopies": {
+                  "taka": {
+                        "title": "Voice of Fire｜Get Through Tonight Omamori",
+                        "desc": "Your result is not just a label. It is the version of you that keeps appearing while listening. This omamori is for getting through the night with the song beside you.",
+                        "sign": "Not every breakdown needs to be seen. Some nights, one song beside you is enough to get through."
+                  },
+                  "toru": {
+                        "title": "Compass｜Stay on Course Omamori",
+                        "desc": "You tend to see the direction first and then move forward. This omamori keeps clarity, judgment, and the courage to continue close to you.",
+                        "sign": "The direction you chose is not wrong. Do not let small chaos pull you away from the distance you have already seen."
+                  },
+                  "ryota": {
+                        "title": "Low Frequency｜Steadily Present Omamori",
+                        "desc": "You may not be the loudest sound, but you often make everything stand. This omamori keeps stability, support, and unseen value close to you.",
+                        "sign": "Not everything important needs to stand in the center. What you support will one day become deep safety."
+                  },
+                  "tomoya": {
+                        "title": "Rhythm｜Find Your Beat Omamori",
+                        "desc": "Your rare gift is finding rhythm again in chaos. This omamori keeps ease, chemistry, and the ability to fall back into rhythm close to you.",
+                        "sign": "You do not have to push everything to the limit today. Follow your beat; the rhythm that fits you will bring you back."
+                  }
+            }
+      },
+      "ja": {
+            "ui": {
+                  "brand": "遊音視域",
+                  "slogan": "好きなものを、そばに結ぶ",
+                  "htmlLang": "ja",
+                  "title": "ONE OK ROCK 性格診断｜遊音視域",
+                  "description": "ONE OK ROCK の中で、あなたはどんなバンドソウルタイプか診断できます。",
+                  "badge": "遊音視域｜好きなものを、そばに結ぶ",
+                  "homeTitle": "ONE OK ROCK 性格診断",
+                  "homeSubtitle": "OORの中で、あなたはどんなバンドソウルタイプ？",
+                  "infoTitle": "診断について",
+                  "infoText": "全24問。直感で選んでください。最後に、OORメンバータイプ、マッチ度、ロックおみくじが表示されます。",
+                  "startBtn": "診断を始める",
+                  "aboutSummary": "遊音視域について",
+                  "aboutText": "アニメ、ゲーム、音楽が好きな人のためのエモーショナルギフトブランドです。好きなものを、そばに結びます。",
+                  "back": "戻る",
+                  "prev": "前の質問",
+                  "submit": "結果を見る",
+                  "submitHint": "すべて答えると結果が見られます",
+                  "questionIndex": "第 {n} 問",
+                  "resultTopTitle": "ONE OK ROCK 性格診断",
+                  "mainType": "あなたのメインタイプ",
+                  "match": "マッチ度 {n}%",
+                  "simpleReading": "かんたん解説",
+                  "omikujiTitle": "あなたのおみくじ",
+                  "goodLabel": "今日の吉",
+                  "badLabel": "今日の避けること",
+                  "dimensionTitle": "6つの指標",
+                  "downloadBtn": "結果カードを保存",
+                  "shareBtn": "友だちにシェア",
+                  "groupBtn": "自分のタイプに合う御守を見る",
+                  "smallNote": "ただのグッズではなく、あの曲が支えてくれた感情をそばに結ぶもの。",
+                  "restartBtn": "もう一度診断する",
+                  "fallbackImage": "メンバー画像は未設定です",
+                  "modalEyebrow": "OOR 同人御守 実物写真",
+                  "modalTitle": "OOR 同人御守 実物写真",
+                  "goodsFallback1": "商品画像が見つかりません。1枚目の写真を配置してください：\nassets/goods.jpg",
+                  "goodsFallback2": "商品画像が見つかりません。2枚目の写真を配置してください：\nassets/goods-2.jpg",
+                  "buyWayBtn": "実物写真と購入方法を見る",
+                  "closeModal": "今は見ない",
+                  "qrLoading": "QRコード読み込み中",
+                  "shareTitle": "ONE OK ROCK 性格診断｜遊音視域",
+                  "shareText": "{result}OORの中で、あなたはどんなバンドソウルタイプか診断してみて。",
+                  "shareResultPrefix": "私は {type} でした。",
+                  "sharePanelOpened": "共有画面を開きました。",
+                  "shareCopied": "リンクをコピーしました。友だちに貼り付けて送れます。",
+                  "shareCanceled": "共有は完了しませんでした。もう一度タップして試せます。",
+                  "downloadGenerating": "結果カードを生成中…",
+                  "downloadDone": "結果カードを生成しました。下部のQRコードから診断を開けます。自動で保存されない場合は、画像を長押しして保存してください。",
+                  "downloadImageFail": "画像入り版の生成に失敗しました。画像なし版を生成しました。画像パスまたはサーバーのMIMEタイプを確認してください。",
+                  "downloadFail": "生成に失敗しました：{msg}。この結果ページをスクリーンショットしてください。",
+                  "filenamePrefix": "OOR性格診断",
+                  "canvasMainType": "あなたのメインタイプ",
+                  "canvasReading": "かんたん解説",
+                  "canvasQrTitle": "QRで診断を開く",
+                  "canvasQrText": "QRコードを読み取ると、自分のOOR性格診断ができます。",
+                  "canvasQrFallback1": "QRで",
+                  "canvasQrFallback2": "診断を開く"
+            },
+            "brand": "遊音視域",
+            "slogan": "好きなものを、そばに結ぶ",
+            "types": {
+                  "taka": {
+                        "name": "TAKA（森内貴寛）",
+                        "displayName": "TAKA（森内貴寛）",
+                        "shortName": "TAKAタイプ",
+                        "quote": "あなたの心には火がある。声は、それが外へあふれる形にすぎない。",
+                        "summary": "あなたは感情の濃度が高い人です。いつも外向きとは限らなくても、本当に心を動かされたとき、強い感染力を放ちます。経験、痛み、愛を表現に変える力があり、そのまっすぐさで誰かをもう一度燃え上がらせることもあります。",
+                        "longText": "あなたの核にあるのは「本当のことを言う」こと。偽物の軽さや、大切な感情をごまかすことが苦手です。人より悔しさや不安を強く受け取るかもしれませんが、それこそが生命力でもあります。あなたにとって成長とは、感情をなくすことではなく、感情を作品、行動、答えに変えていくことです。",
+                        "omikuji": {
+                              "title": "第一番｜燃声の御籤",
+                              "text": "心の火を急いで消さなくていい。ときにあなたを焦がすけれど、同時に道も照らしてくれる。今日は、まだ言えていないことを誠実な表現に変えるのに向いています。",
+                              "good": "素直に伝える、もう一度始める",
+                              "bad": "平気なふり、好きを抑え込む"
+                        }
+                  },
+                  "toru": {
+                        "name": "TORU（山下亨）",
+                        "displayName": "TORU（山下亨）",
+                        "shortName": "TORUタイプ",
+                        "quote": "あなたは一番騒がしい場所にいなくても、みんなの行き先を決めている。",
+                        "summary": "あなたには強い方向感覚と責任感があります。状況を観察し、混乱を整理し、大事な場面で決断を引き受けられる人です。感情をいつも表に出すわけではなくても、行動で「こっちへ行こう、散らばらないで」と伝えます。",
+                        "longText": "あなたの核にあるのは「可能性をもっと遠くへ連れていく」こと。同じ場所で足踏みすることや、計画のない消耗が苦手です。まとめ役、推進役、長期戦に向いています。ただし、すべての関係を完璧に整える必要はありません。柔らかさを見せることも、ひとつのリーダーシップです。",
+                        "omikuji": {
+                              "title": "第九番｜舵取りの御籤",
+                              "text": "あなたはもう遠くを見ています。目の前の小さな混乱に足を取られすぎないで。今日は決めること、方向を定めること、自分の判断を信じることに向いています。",
+                              "good": "計画を立てる、前へ導く",
+                              "bad": "すべての重圧を一人で背負う"
+                        }
+                  },
+                  "ryota": {
+                        "name": "RYOTA（小浜良太）",
+                        "displayName": "RYOTA（小浜良太）",
+                        "shortName": "RYOTAタイプ",
+                        "quote": "一曲を立たせるものは、いつも一番大きな音とは限らない。",
+                        "summary": "あなたは控えめだけれど、とても大切な人です。目立つことを急がず、関係やチームの中で安定した支えになります。あなたの強さは圧ではなく、人を安心させる存在感です。",
+                        "longText": "あなたの核にあるのは「安定してそこにいる」こと。複雑なことをシンプルにし、周りが慌てても頼れる状態を保てます。自分は十分に目立っていないと感じることがあるかもしれませんが、誰かが自由に輝けるのは、あなたが土台を支えているからでもあります。自分の重みを軽く見ないでください。あなたのやさしさと安定感は、貴重な力です。",
+                        "omikuji": {
+                              "title": "第十五番｜低音の御籤",
+                              "text": "大切なものすべてが真ん中に立つ必要はありません。あなたが支える日常、関係、約束は、いつか誰かの深い安心になります。",
+                              "good": "リズムを保つ、自分を労わる",
+                              "bad": "控えめだからと価値を否定する"
+                        }
+                  },
+                  "tomoya": {
+                        "name": "TOMOYA（神吉智也）",
+                        "displayName": "TOMOYA（神吉智也）",
+                        "shortName": "TOMOYAタイプ",
+                        "quote": "あなたのリズムが鳴ると、世界は少し緊張をほどく。",
+                        "summary": "あなたは空気をもう一度整えられる人です。ユーモア、ゆるさ、そして強いリズム感があります。いつも真面目に問題を解くわけではなくても、人を緊張から今この瞬間へ戻すのが得意です。",
+                        "longText": "あなたの核にあるのは「すべてをもう一度合うリズムへ戻す」こと。どこで力を入れ、どこでゆるめるべきかを知っています。チームは走り続けるだけではなく、呼吸、冗談、默契も必要です。あなたは一見ゆるく見えて、とても敏感です。到着することだけでなく、一緒に演奏する過程も大切だと周りに思い出させます。",
+                        "omikuji": {
+                              "title": "第二十番｜リズムの御籤",
+                              "text": "今日は何もかも限界まで追い込まなくていい。自分のビートについていきましょう。ゆっくりでも、あなたに合うリズムは正しい場所へ連れていってくれます。",
+                              "good": "少しゆるめる、感覚を取り戻す",
+                              "bad": "他人のリズムに引きずられる"
+                        }
+                  }
+            },
+            "dimensions": [
+                  "感情の爆発",
+                  "方向感覚",
+                  "支える力",
+                  "リズム感",
+                  "推進力",
+                  "ゆるさ"
+            ],
+            "questions": [
+                  {
+                        "text": "大切なことを始めるとき、あなたはまずどうする？",
+                        "options": [
+                              "まず気持ちに火をつけて、本当にやりたいか確かめる",
+                              "まず方向を見て、力を注ぐ価値があるか判断する",
+                              "まず土台を固めて、急いで前に出ない",
+                              "まず自分のリズムを見つけて、少しずつ入っていく"
+                        ]
+                  },
+                  {
+                        "text": "チームの中で、あなたが自然に担う役割は？",
+                        "options": [
+                              "みんなの感情を引き上げる人",
+                              "目標を見て、前へ進ませる人",
+                              "目立たなくても土台を支える人",
+                              "リズムを整えて、みんなが安心して力を出せるようにする人"
+                        ]
+                  },
+                  {
+                        "text": "大きなステージに立つなら、一番気になることは？",
+                        "options": [
+                              "本当の自分をちゃんと出せるか",
+                              "ライブ全体の流れと完成度",
+                              "自分のパートを安定して支えられるか",
+                              "現場のリズムが心地よく力強いか"
+                        ]
+                  },
+                  {
+                        "text": "友だちが落ち込んでいるとき、あなたはどうしがち？",
+                        "options": [
+                              "ストレートな言葉で引き戻す。「まだできるよ」",
+                              "次にどう動けばいいか一緒に整理する",
+                              "静かにそばにいて、安心できる後方になる",
+                              "まず笑わせて、空気を少し軽くする"
+                        ]
+                  },
+                  {
+                        "text": "一番怖い状態は？",
+                        "options": [
+                              "感情がたくさんあるのに、言葉にできないこと",
+                              "みんな頑張っているのに、方向がバラバラなこと",
+                              "自分がチームの不安定な部分になってしまうこと",
+                              "リズムが崩れて、戻し方が分からなくなること"
+                        ]
+                  },
+                  {
+                        "text": "どんな成長をより信じる？",
+                        "options": [
+                              "痛みを声に変えること",
+                              "野心を計画に変えること",
+                              "普通の練習を身体に染み込ませること",
+                              "繰り返しの日々から新しいビートを刻むこと"
+                        ]
+                  },
+                  {
+                        "text": "人に褒められるなら、どれが一番うれしい？",
+                        "options": [
+                              "本当に人を動かす力があるね",
+                              "あなたがいると、みんな行き先が分かる",
+                              "控えめだけど、いないと成立しない",
+                              "あなたがいると空気が落ち着く"
+                        ]
+                  },
+                  {
+                        "text": "決断するとき、あなたはどれに近い？",
+                        "options": [
+                              "自分の心が燃えているかを先に聞く",
+                              "この一歩がどこへつながるかを見る",
+                              "自分が継続して背負えるか確かめる",
+                              "今のリズムが合っているか感じる"
+                        ]
+                  },
+                  {
+                        "text": "人生が一曲なら、あなたはどのパートでありたい？",
+                        "options": [
+                              "鳥肌が立つようなボーカルライン",
+                              "曲を前へ押し出すギターライン",
+                              "目立たないけれど曲を成立させる低音",
+                              "みんなが自然に体を揺らすドラムビート"
+                        ]
+                  },
+                  {
+                        "text": "プレッシャーを感じたときの第一反応は？",
+                        "options": [
+                              "正面から受ける。痛いほど証明したくなる",
+                              "落ち着いて優先順位を組み直す",
+                              "慌てず、自分の役割をきちんとやる",
+                              "まず呼吸を整えて、リズムを取り戻す"
+                        ]
+                  },
+                  {
+                        "text": "どんな関係が好き？",
+                        "options": [
+                              "正直で、熱くて、まっすぐ近づける関係",
+                              "信頼し合って、一緒に前へ進める関係",
+                              "多くを語らなくても、そばにいると分かる関係",
+                              "心地よくて、笑えて、自然に通じ合う関係"
+                        ]
+                  },
+                  {
+                        "text": "作品やバンドを好きになるとき、最初に刺さりやすいのは？",
+                        "options": [
+                              "声に宿る感情と爆発力",
+                              "全体の空気、ステージ感、野心",
+                              "聴くほど大事になっていく細部",
+                              "ライブのグルーヴとメンバー同士のゆるさ"
+                        ]
+                  },
+                  {
+                        "text": "自分に一言かけるなら？",
+                        "options": [
+                              "心の火を歌にして",
+                              "進路を外れず、もっと遠くへ行こう",
+                              "大丈夫、あなたは何度も耐えてきた",
+                              "焦らないで。自分のリズムについていこう"
+                        ]
+                  },
+                  {
+                        "text": "どんな誤解が一番嫌？",
+                        "options": [
+                              "ただ感情的だと思われること。本当は本気なのに",
+                              "強引だと思われること。散らばってほしくないだけなのに",
+                              "存在感がないと思われること。ずっと出力しているのに",
+                              "ただゆるいと思われること。リズムはちゃんと見えているのに"
+                        ]
+                  },
+                  {
+                        "text": "一番あこがれるステージの瞬間は？",
+                        "options": [
+                              "会場全体が大合唱して、感情が頂点に届く瞬間",
+                              "照明がついて、すべての配置がぴたりとはまる瞬間",
+                              "低音が入って、曲に一気に重みが出る瞬間",
+                              "ドラムが鳴って、全員が一気に引き込まれる瞬間"
+                        ]
+                  },
+                  {
+                        "text": "衝突したとき、あなたはどうする？",
+                        "options": [
+                              "はっきり話す。ため込むのは好きじゃない",
+                              "まず場を落ち着かせてから感情を話す",
+                              "きつい言葉を避けて、まず関係を支える",
+                              "まず空気を和らげて、場が崩れないようにする"
+                        ]
+                  },
+                  {
+                        "text": "どんな瞬間に一番燃えやすい？",
+                        "options": [
+                              "誰かに「無理」と言われたとき",
+                              "もっと大きな目標が見えたとき",
+                              "自分の積み重ねに意味があったと分かったとき",
+                              "すべてが突然リズムに乗ったとき"
+                        ]
+                  },
+                  {
+                        "text": "あなたがエネルギーなら、どれに近い？",
+                        "options": [
+                              "火花。鋭く、まぶしく、本物",
+                              "風向き。静かだけど行き先を決める",
+                              "土台。派手ではないけれど重さを受け止める",
+                              "心拍。安定していて、生きている"
+                        ]
+                  },
+                  {
+                        "text": "自分のどの面を一番守りたい？",
+                        "options": [
+                              "まだ熱く表現できる自分",
+                              "まだ遠くを計画できる自分",
+                              "まだ静かに続けられる自分",
+                              "まだゆるさとユーモアを持っている自分"
+                        ]
+                  },
+                  {
+                        "text": "長期目標をやり切るとき、何が支えになる？",
+                        "options": [
+                              "悔しさと好きな気持ち",
+                              "明確な方向と自分への要求",
+                              "毎日少しずつ積み上げる安定感",
+                              "続けられる自分なりのリズム"
+                        ]
+                  },
+                  {
+                        "text": "「強さ」に一番近いものは？",
+                        "options": [
+                              "崩れた経験があっても、まだ歌えること",
+                              "誰かをもっと遠くへ連れていけること",
+                              "証明しなくても、人を安心させられること",
+                              "混乱の中でもリズムを取り戻せること"
+                        ]
+                  },
+                  {
+                        "text": "好きな人の前では、あなたはどうなりやすい？",
+                        "options": [
+                              "とても素直で、まっすぐで、隠せない",
+                              "もっと頼れる人、責任ある人になりたい",
+                              "相手の習慣や細かいことを静かに気にかける",
+                              "相手に楽になってほしくて、笑わせたくなる"
+                        ]
+                  },
+                  {
+                        "text": "おみくじを引くなら、何と言ってほしい？",
+                        "options": [
+                              "あなたの声は、ちゃんと届く価値がある",
+                              "あなたが選んだ方向は間違っていない",
+                              "あなたが支えてきたものは、いつか花開く",
+                              "あなたのリズムは、あなたを自分自身へ連れ戻す"
+                        ]
+                  },
+                  {
+                        "text": "最後に、どんな人になりたい？",
+                        "options": [
+                              "熱くて誠実で、痛みさえ光に変えられる人",
+                              "冷静で揺らがず、誰かを遠くへ導ける人",
+                              "やさしく安定して、後ろからすべてを支える人",
+                              "ゆるくて面白くて、世界をまたリズムに乗せる人"
+                        ]
+                  }
+            ],
+            "omamoriCopies": {
+                  "taka": {
+                        "title": "燃声タイプ｜今夜を越える御守",
+                        "desc": "あなたの結果はただのラベルではなく、曲を聴くたびに現れる自分です。この御守は、あの曲と一緒に夜を越えるためのもの。",
+                        "sign": "すべての崩れそうな瞬間を誰かに見せる必要はありません。ある夜は、一曲がそばにあるだけで十分です。"
+                  },
+                  "toru": {
+                        "title": "舵取りタイプ｜方向を外さない御守",
+                        "desc": "あなたはまず方向を見て、それから前へ進む人。この御守は、清醒さ、判断、進み続ける勇気をそばに結びます。",
+                        "sign": "あなたが選んだ方向は間違っていません。目の前の小さな混乱に、見えている遠くを奪われないで。"
+                  },
+                  "ryota": {
+                        "title": "低音タイプ｜安定してそこにいる御守",
+                        "desc": "あなたは一番大きな音ではなくても、すべてを成立させる土台です。この御守は、安定、支え、見えにくい価値をそばに結びます。",
+                        "sign": "大切なものすべてが中心に立つ必要はありません。あなたが支えるものは、いつか深い安心になります。"
+                  },
+                  "tomoya": {
+                        "title": "リズムタイプ｜自分の拍を取り戻す御守",
+                        "desc": "あなたの貴重な力は、混乱の中でリズムを取り戻せること。この御守は、ゆるさ、默契、また合うリズムへ戻る力をそばに結びます。",
+                        "sign": "今日は何もかも限界まで押し込まなくていい。自分のビートについていけば、合うリズムが戻してくれます。"
+                  }
+            }
+      }
+};
+
     function getOmamoriCopy(result) {
       const type = result?.type || TYPES.taka;
-      const copies = {
-        taka: {
-          title: "燃声型｜撑过今晚御守",
-          desc: "你测出的不是一个标签，而是一种听歌时反复出现的自己。你适合的是「撑过今晚」签：把那首歌陪你走过的夜晚，系在身边。",
-          sign: "不是每一次崩溃都需要被别人看见。有些夜晚，只要一首歌陪你撑过去就够了。",
-        },
-        toru: {
-          title: "掌舵型｜方向不偏航御守",
-          desc: "你习惯先看清方向，再带自己往前走。你适合的是「方向不偏航」签：把清醒、判断和继续前进的勇气，系在身边。",
-          sign: "你选择的方向没有错。别被眼前的小混乱拖住，你已经比自己想象中更接近远方。",
-        },
-        ryota: {
-          title: "低频型｜稳稳在场御守",
-          desc: "你不是最吵的那一声，却常常是让一切成立的底盘。你适合的是「稳稳在场」签：把安定、支撑和不被忽略的价值，系在身边。",
-          sign: "不是所有重要的东西都需要站在正中央。你撑住的东西，会在未来变成很深的安全感。",
-        },
-        tomoya: {
-          title: "节奏型｜找回自己节奏御守",
-          desc: "你最珍贵的地方，是能在混乱里重新找到节奏。你适合的是「找回自己节奏」签：把松弛、默契和继续合拍的能力，系在身边。",
-          sign: "今天不必把所有事情都逼到极限。跟着自己的鼓点走，适合你的节奏会带你回到自己。",
-        },
-      };
+      const copies = I18N[currentLang]?.omamoriCopies || I18N.zh.omamoriCopies;
       return copies[type.id] || copies.taka;
     }
 
@@ -1174,6 +2293,154 @@
 
     const $ = (id) => document.getElementById(id);
 
+
+    let currentLang = "zh";
+
+    function normalizeLang(lang) {
+      const value = String(lang || "").toLowerCase();
+      if (value.startsWith("ja")) return "ja";
+      if (value.startsWith("en")) return "en";
+      return "zh";
+    }
+
+    function detectInitialLang() {
+      try {
+        const saved = localStorage.getItem("oor_personality_lang");
+        if (["zh", "en", "ja"].includes(saved)) return saved;
+      } catch (err) {}
+      return normalizeLang(navigator.language || (navigator.languages && navigator.languages[0]) || "zh");
+    }
+
+    function t(key, params = {}) {
+      const ui = I18N[currentLang]?.ui || I18N.zh.ui;
+      let text = ui[key] ?? I18N.zh.ui[key] ?? key;
+      Object.entries(params).forEach(([k, v]) => {
+        text = String(text).replaceAll(`{${k}}`, String(v));
+      });
+      return text;
+    }
+
+    function applyDataTranslations() {
+      const pack = I18N[currentLang] || I18N.zh;
+      const ui = pack.ui;
+      CONFIG.brand = pack.brand;
+      CONFIG.slogan = pack.slogan;
+      document.documentElement.lang = ui.htmlLang || "zh-CN";
+      document.title = ui.title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute("content", ui.description);
+
+      Object.entries(pack.types).forEach(([id, value]) => {
+        if (!TYPES[id]) return;
+        Object.assign(TYPES[id], value);
+        TYPES[id].omikuji = value.omikuji;
+      });
+
+      DIMENSIONS.forEach((dimension, index) => {
+        dimension.label = pack.dimensions[index] || dimension.label;
+      });
+
+      QUESTIONS.forEach((question, index) => {
+        const translatedQuestion = pack.questions[index];
+        if (!translatedQuestion) return;
+        question.text = translatedQuestion.text;
+        question.options.forEach((option, optionIndex) => {
+          option.text = translatedQuestion.options[optionIndex] || option.text;
+        });
+      });
+    }
+
+    function setText(selector, text) {
+      const el = document.querySelector(selector);
+      if (el) el.textContent = text;
+    }
+
+    function setHTML(selector, html) {
+      const el = document.querySelector(selector);
+      if (el) el.innerHTML = html;
+    }
+
+    function applyStaticTexts() {
+      setText(".badge", t("badge"));
+      setText(".home-title", t("homeTitle"));
+      setText(".home-subtitle", t("homeSubtitle"));
+      setText(".info-box-title", t("infoTitle"));
+      setText(".info-box-text", t("infoText"));
+      $("startBtn").textContent = t("startBtn");
+      setText("details.about summary", t("aboutSummary"));
+      setText("details.about p", t("aboutText"));
+      $("backHomeBtn").textContent = t("back");
+      $("prevBtn").textContent = t("prev");
+      $("submitBtn").textContent = t("submit");
+      $("submitHint").textContent = t("submitHint");
+      setText(".result-top-title", t("resultTopTitle"));
+      setText(".result-top-subtitle", CONFIG.brand);
+      setText(".image-fallback-tip", t("fallbackImage"));
+      document.querySelectorAll(".section-label").forEach((el) => { el.textContent = t("mainType"); });
+      const sectionTitles = document.querySelectorAll(".section-title");
+      if (sectionTitles[0]) sectionTitles[0].textContent = t("simpleReading");
+      if (sectionTitles[1]) sectionTitles[1].textContent = t("omikujiTitle");
+      if (sectionTitles[2]) sectionTitles[2].textContent = t("dimensionTitle");
+      const goodBadLabels = document.querySelectorAll(".good-bad-label");
+      if (goodBadLabels[0]) goodBadLabels[0].textContent = t("goodLabel");
+      if (goodBadLabels[1]) goodBadLabels[1].textContent = t("badLabel");
+      $("downloadBtn").textContent = t("downloadBtn");
+      $("shareBtn").textContent = t("shareBtn");
+      $("groupBtn").textContent = t("groupBtn");
+      setText(".small-note", t("smallNote"));
+      $("restartBtn").textContent = t("restartBtn");
+      setText(".modal-eyebrow", t("modalEyebrow"));
+      $("modalResultName").textContent = t("modalTitle");
+      $("buyWayBtn").textContent = t("buyWayBtn");
+      $("closeGroupModalBtn").textContent = t("closeModal");
+      setHTML("#groupQrFallback", t("goodsFallback1").replace(/\n/g, "<br />"));
+      setHTML("#groupQrFallback2", t("goodsFallback2").replace(/\n/g, "<br />"));
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.lang === currentLang);
+      });
+    }
+
+    function updateVisibleResultText() {
+      if (!state.result) return;
+      const r = state.result.type;
+      $("heroQuote").textContent = r.quote;
+      $("resultName").textContent = r.displayName;
+      $("matchPill").textContent = t("match", { n: state.result.match });
+      $("resultSummary").textContent = r.summary;
+      $("resultLongText").textContent = r.longText;
+      $("signTitle").textContent = r.omikuji.title;
+      $("signQuote").textContent = r.quote;
+      $("signText").textContent = r.omikuji.text;
+      $("signGood").textContent = r.omikuji.good;
+      $("signBad").textContent = r.omikuji.bad;
+      $("imageFallbackName").textContent = r.shortName;
+      const dimensionsEl = $("dimensions");
+      if (dimensionsEl && state.result.dims) {
+        dimensionsEl.innerHTML = "";
+        DIMENSIONS.forEach((d) => {
+          const value = state.result.dims[d.key] || 0;
+          const div = document.createElement("div");
+          div.innerHTML = `
+            <div class="dimension-head"><span>${d.label}</span><span>${value}</span></div>
+            <div class="bar"><div class="bar-inner" style="width:${value}%"></div></div>
+          `;
+          dimensionsEl.appendChild(div);
+        });
+      }
+    }
+
+    function setLanguage(lang, options = {}) {
+      currentLang = ["zh", "en", "ja"].includes(lang) ? lang : "zh";
+      if (options.persist !== false) {
+        try { localStorage.setItem("oor_personality_lang", currentLang); } catch (err) {}
+      }
+      applyDataTranslations();
+      applyStaticTexts();
+      if (!$("testPage").classList.contains("hidden")) renderQuestion();
+      if (!$("resultPage").classList.contains("hidden")) updateVisibleResultText();
+      trackAnalyticsEvent("language_select", { language: currentLang });
+    }
+
     function trackAnalyticsEvent(eventName, params = {}) {
       if (typeof gtag === "function") {
         gtag("event", eventName, {
@@ -1214,7 +2481,7 @@
           correctLevel: QRCode.CorrectLevel.M,
         });
       } else {
-        qrEl.textContent = "二维码加载中";
+        qrEl.textContent = t("qrLoading");
         qrEl.style.fontSize = "12px";
         qrEl.style.color = "var(--muted)";
       }
@@ -1245,10 +2512,10 @@
 
     async function shareTest() {
       const url = getShareUrl();
-      const resultText = state.result?.type?.shortName ? `我测出了 ${state.result.type.shortName}，` : "";
+      const resultText = state.result?.type?.shortName ? t("shareResultPrefix", { type: state.result.type.shortName }) : "";
       const shareData = {
-        title: "ONE OK ROCK 人格测试｜游音视域",
-        text: `${resultText}来测测你在 OOR 里是哪一种乐队灵魂。`,
+        title: t("shareTitle"),
+        text: t("shareText", { result: resultText }),
         url,
       };
 
@@ -1261,21 +2528,21 @@
       try {
         if (navigator.share) {
           await navigator.share(shareData);
-          $("shareStatus").textContent = "已打开系统分享面板。";
+          $("shareStatus").textContent = t("sharePanelOpened");
           trackAnalyticsEvent("share_test_success", {
             share_method: "web_share",
             ...getResultAnalyticsParams(),
           });
         } else {
           await copyText(url);
-          $("shareStatus").textContent = "链接已复制，可以粘贴发给朋友。";
+          $("shareStatus").textContent = t("shareCopied");
           trackAnalyticsEvent("share_test_success", {
             share_method: "copy_link",
             ...getResultAnalyticsParams(),
           });
         }
       } catch (err) {
-        $("shareStatus").textContent = "分享未完成，可以重新点击按钮尝试。";
+        $("shareStatus").textContent = t("shareCanceled");
       }
     }
 
@@ -1290,7 +2557,7 @@
       const answeredCount = state.answers.filter((x) => x !== null).length;
       $("progressText").textContent = `${state.index + 1} / ${CONFIG.totalQuestions}`;
       $("progressInner").style.width = `${((state.index + 1) / CONFIG.totalQuestions) * 100}%`;
-      $("questionIndex").textContent = `第 ${state.index + 1} 题`;
+      $("questionIndex").textContent = t("questionIndex", { n: state.index + 1 });
       $("questionTitle").textContent = q.text;
 
       $("options").innerHTML = "";
@@ -1371,7 +2638,7 @@
 
       $("heroQuote").textContent = r.quote;
       $("resultName").textContent = r.displayName;
-      $("matchPill").textContent = `匹配度 ${state.result.match}%`;
+      $("matchPill").textContent = t("match", { n: state.result.match });
       $("resultSummary").textContent = r.summary;
       $("resultLongText").textContent = r.longText;
       $("signTitle").textContent = r.omikuji.title;
@@ -1483,7 +2750,7 @@
       setCanvasFont(ctx, 800, 60);
       ctx.fillText(r.shortName, x + 58, y + h * 0.42);
       setCanvasFont(ctx, 500, 30);
-      ctx.fillText("角色图资源待配置", x + 58, y + h * 0.42 + 54);
+      ctx.fillText(t("fallbackImage"), x + 58, y + h * 0.42 + 54);
     }
 
     function createCardCanvas(result, options = { includeImage: true }) {
@@ -1542,7 +2809,7 @@
 
         ctx.fillStyle = "#6a7d70";
         setCanvasFont(ctx, 700, 27);
-        ctx.fillText("你的主类型", 126, typeCardY + 62);
+        ctx.fillText(t("canvasMainType"), 126, typeCardY + 62);
 
         ctx.fillStyle = "#17251d";
         setCanvasFont(ctx, 800, 46);
@@ -1557,7 +2824,7 @@
         ctx.fill();
         ctx.fillStyle = "#4d7058";
         setCanvasFont(ctx, 800, 28);
-        ctx.fillText(`匹配度 ${result.match}%`, pillX + 24, pillY + 38);
+        ctx.fillText(t("match", { n: result.match }), pillX + 24, pillY + 38);
 
         // 解读卡片。
         const descY = 1170;
@@ -1570,7 +2837,7 @@
 
         ctx.fillStyle = "#17251d";
         setCanvasFont(ctx, 800, 31);
-        ctx.fillText("该人格的简单解读", 126, descY + 66);
+        ctx.fillText(t("canvasReading"), 126, descY + 66);
         ctx.fillStyle = "#435349";
         setCanvasFont(ctx, 500, 27);
         wrapText(ctx, r.summary, 126, descY + 126, 650, 43, 5);
@@ -1586,11 +2853,11 @@
 
         ctx.fillStyle = "#17251d";
         setCanvasFont(ctx, 800, 31);
-        ctx.fillText("扫码打开测试", 126, shareY + 62);
+        ctx.fillText(t("canvasQrTitle"), 126, shareY + 62);
 
         ctx.fillStyle = "#435349";
         setCanvasFont(ctx, 500, 25);
-        wrapText(ctx, "扫码就能直接测自己的OOR人格哦~", 126, shareY + 112, 430, 40, 2);
+        wrapText(ctx, t("canvasQrText"), 126, shareY + 112, 430, 40, 2);
 
         const qrX = 630;
         const qrY = shareY + 32;
@@ -1608,7 +2875,7 @@
         } else {
           ctx.fillStyle = "#6a7d70";
           setCanvasFont(ctx, 700, 20);
-          wrapText(ctx, "扫码打开\n测试", qrX + 18, qrY + 62, qrSize - 36, 28, 2);
+          wrapText(ctx, `${t("canvasQrFallback1")}\n${t("canvasQrFallback2")}`, qrX + 18, qrY + 62, qrSize - 36, 28, 2);
         }
 
         ctx.fillStyle = "#6a7d70";
@@ -1681,7 +2948,7 @@
       const r = result.type;
       const copy = getOmamoriCopy(result);
 
-      $("modalResultName").textContent = "OOR 同人御守实拍";
+      $("modalResultName").textContent = t("modalTitle");
       $("groupModal").classList.remove("hidden");
 
       trackAnalyticsEvent("omamori_detail_view", {
@@ -1707,8 +2974,8 @@
     async function downloadResultCard() {
       const result = state.result || calcResult();
       const r = result.type;
-      const filename = `OOR人格测试-${r.shortName}.png`;
-      $("downloadStatus").textContent = "正在生成结果卡…";
+      const filename = `${t("filenamePrefix")}-${r.shortName}.png`;
+      $("downloadStatus").textContent = t("downloadGenerating");
 
       // 关键修复：Canvas 一旦被跨域图片污染，clearRect 后仍然无法导出。
       // 所以如果第一次导出失败，必须创建一个全新的 Canvas，生成无角色图版本。
@@ -1734,21 +3001,28 @@
 
         card.drawTextBlocks();
         await downloadCanvas(card.canvas, filename);
-        $("downloadStatus").textContent = "结果卡已生成，底部二维码可扫码打开测试。如果浏览器没有自动下载，请长按图片保存。";
+        $("downloadStatus").textContent = t("downloadDone");
       } catch (err) {
         console.error("带图结果卡生成失败：", err);
         try {
           const safeCard = createCardCanvas(result, { includeImage: false });
           safeCard.drawTextBlocks();
           await downloadCanvas(safeCard.canvas, filename);
-          $("downloadStatus").textContent = "带图版本生成失败，已生成无角色图版本。请检查图片路径或服务器 MIME 类型。";
+          $("downloadStatus").textContent = t("downloadImageFail");
         } catch (fallbackErr) {
           console.error("无图结果卡生成失败：", fallbackErr);
           const msg = fallbackErr && fallbackErr.message ? fallbackErr.message : String(fallbackErr);
-          $("downloadStatus").textContent = `生成失败：${msg}。请先截图保存当前结果页。`;
+          $("downloadStatus").textContent = t("downloadFail", { msg });
         }
       }
     }
+
+
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(detectInitialLang(), { persist: false });
 
     $("startBtn").addEventListener("click", () => {
       renderQuestion();
